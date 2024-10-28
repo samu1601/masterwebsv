@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosotros</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #0073e6;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            margin: 0;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        section {
+            padding: 20px;
+            text-align: center;
+        }
+        footer {
+            background-color: #0073e6;
+            color: white;
+            text-align: center;
+            padding: 5px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 0.8em;
+        }
+        #cerrar-sesion {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #e60000;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Nosotros</h1>
+    </header>
+
+    <div id="menu-placeholder"></div>
+
+    <section>
+        <h2>Información sobre el equipo</h2>
+        <p>Esta página fue creada por estudiantes de Ingeniería en Desarrollo de Software de la Universidad ITCA-FEPADE.</p>
+        <p>Nuestro objetivo es proporcionar información accesible y relevante sobre los departamentos y municipios de El Salvador, contribuyendo al desarrollo del conocimiento y la tecnología en el país.</p>
+        <p>Agradecemos su visita y esperamos que la información sea de utilidad.</p>
+    </section>
+
+    <button id="cerrar-sesion">Cerrar sesión</button>
+
+    <footer>
+        <p>&copy; 2024 Master Web. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Cargar el menú con estilo del index.html
+        fetch('menu.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('menu-placeholder').innerHTML = data;
+            });
+
+        // Función para cerrar sesión
+        document.getElementById('cerrar-sesion').onclick = function() {
+            // Limpiar los datos del localStorage
+            localStorage.removeItem('registrado');
+            localStorage.removeItem('departamento');
+            localStorage.removeItem('nombre');
+            localStorage.removeItem('apellido');
+            localStorage.removeItem('edad');
+            localStorage.removeItem('genero');
+
+            // Redirigir al inicio
+            window.location.href = 'index.html';
+        };
+    </script>
+</body>
+</html>

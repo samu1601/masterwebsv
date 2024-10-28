@@ -1,0 +1,2751 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Departamento Seleccionado</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #0073e6;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            margin: 0;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        section {
+            padding: 20px;
+            text-align: center;
+        }
+        footer {
+            background-color: #0073e6;
+            color: white;
+            text-align: center;
+            padding: 5px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 0.8em;
+        }
+        #cerrar-sesion {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #e60000;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        #campo-busqueda {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 10px;
+            width: 200px;
+        }
+        #resultados-busqueda {
+            position: absolute;
+            top: 45px;
+            left: 10px;
+            background-color: white;
+            border: 1px solid #ccc;
+            z-index: 1000;
+            display: none;
+            max-height: 150px;
+            overflow-y: auto;
+            width: 200px;
+        }
+        .departamento {
+            padding: 10px;
+            cursor: pointer;
+        }
+        .departamento:hover {
+            background-color: #f0f0f0;
+        }
+        .empresa img {
+            max-width: 300px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        .empresa {
+            display: none; /* Oculto por defecto */
+        }
+        .mapa {
+            width: 100%;
+            height: 400px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Departamento Seleccionado</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="nosotros.html">Nosotros</a></li>
+            <li><a href="servicios.html">Servicios</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+        <button id="cerrar-sesion">Cerrar Sesión</button>
+    </nav>
+
+    <div id="menu-placeholder"></div>
+
+    <input type="text" id="campo-busqueda" placeholder="Buscar departamento...">
+    <div id="resultados-busqueda"></div>
+
+    <section>
+        <h2 id="nombre-departamento">Cargando...</h2>
+        <p>Aquí encontrarás las empresas mas  relevante para este departamento.</p>
+    
+        <!-- Super Selectos en San Salvador -->
+        <div id="super-selectos" class="empresa">
+            <h3>Super Selectos</h3>
+            <img src="img/Super Selectos.jpg" alt="Super Selectos">
+            <p>Super Selectos es una cadena de supermercados salvadoreña perteneciente al Grupo Calleja. Cuenta con múltiples sucursales en todo El Salvador y ofrece una amplia variedad de productos, incluyendo alimentos preparados, panadería y categorías gourmet.</p>
+            <p><strong>Teléfono:</strong> 2222 3011</p>
+            <p><strong>Horario de apertura:</strong> Generalmente de 8:00 a.m. a 10:00 p.m., aunque puede variar.</p>
+    
+            <h4>Sucursales:</h4>
+            <p><strong>Super Selectos Masferrer</strong><br> Dirección: Prolongación 59 Avenida Sur y calle El Progreso 2934, San Salvador<br> Teléfono: 2267-6767</p>
+            <div id="map-selectos-masferrer" class="mapa"></div>
+    
+            <p><strong>Super Selectos Multiplaza San Salvador</strong><br> Dirección: Primer Nivel, Ancla 3, Multiplaza San Salvador<br> Teléfono: 2267-6767</p>
+            <div id="map-selectos-multiplaza" class="mapa"></div>
+    
+            <p><strong>Super Selectos Barrio San Miguelito</strong><br> Dirección: 29 Calle Poniente y 5a Avenida Norte, Barrio San Miguelito, San Salvador</p>
+            <div id="map-selectos-san-miguelito" class="mapa"></div>
+    
+            <p><strong>Super Selectos Paseo General Escalón</strong><br> Dirección: Paseo General Escalón y 79 Avenida Sur, San Salvador<br> Teléfono: 2213-6334</p>
+            <div id="map-selectos-escalon" class="mapa"></div>
+    
+            <p><strong>Super Selectos Estadio Santa Lucía</strong><br> Dirección: Cerca de la instalación deportiva Estadio Santa Lucía, San Salvador</p>
+            <div id="map-selectos-santa-lucia" class="mapa"></div>
+        </div>
+    
+        <!-- Coscafé en San Salvador -->
+        <div id="coscafe" class="empresa">
+            <h3>Coscafé</h3>
+            <img src="img/Coscafe.jpeg" alt="Coscafé">
+            <p>Coscafé es una marca de café muy popular en El Salvador, producida por la empresa Planta de Torrefacción de Café, S.A. (Plantosa). Esta marca ofrece una variedad de productos de café, incluyendo café tostado e instantáneo, elaborados con granos de café arábica de alta calidad.</p>
+            
+            <h4>Productos y Servicios:</h4>
+            <ul>
+                <li>Café Tostado e Instantáneo: Coscafé ofrece diferentes presentaciones de café, tanto en grano como molido, así como café instantáneo.</li>
+                <li>Calidad: La producción de Coscafé se realiza bajo estrictos controles de calidad para asegurar un excelente sabor y aroma en cada taza.</li>
+            </ul>
+            
+            <h4>Historia y Reconocimiento:</h4>
+            <ul>
+                <li>Fundación: Plantosa, la empresa detrás de Coscafé, tiene más de 25 años de experiencia en la industria del café.</li>
+                <li>Popularidad: Coscafé es una de las marcas de café más consumidas en El Salvador, conocida por su sabor y calidad consistentes.</li>
+            </ul>
+    
+            <h4>Ubicaciones y Contacto:</h4>
+            <p><strong>Casa Coscafé Soyapango</strong><br> Dirección: Soyapango, San Salvador<br> Teléfono: No disponible</p>
+
+                <h4>Sucursales:</h4>
+                <p><strong>Sucursal Soyapango</strong><br> Dirección: Plaza Mundo, Soyapango, San Salvador</p>
+                <div id="map-coscafe-soyapango" class="mapa"></div>
+
+        </div>
+    
+        <!-- Galvaniza en San Salvador -->
+        <div id="galvaniza" class="empresa">
+            <h3>Galvaniza</h3>
+            <img src="img/Galvaniza.jpeg" alt="Galvaniza">
+            <p>Galvaniza es una empresa especializada en la galvanización de acero, ofreciendo soluciones para techos, estructuras metálicas y más.</p>
+    
+            <h4>Sucursales:</h4>
+            <p><strong>Galvaniza Autopista Sur</strong><br> Dirección: Boulevard de Los Proceres, Autopista Sur, San Salvador<br> Teléfono: 2212 7702</p>
+            <div id="map-galvaniza-autopista" class="mapa"></div>
+    
+            <p><strong>Galvaniza San Miguelito</strong><br> Dirección: Av. Oscar Arnulfo Romero y 17 calle Oriente, Barrio San Miguelito, San Salvador<br> Teléfono: 2281-0444</p>
+            <div id="map-galvaniza-san-miguelito" class="mapa"></div>
+    
+            <p><strong>Galvaniza Venezuela</strong><br> Dirección: 29 Av. Sur y Antigua Calle del Ferrocarril, Colonia Cucumacayán, San Salvador<br> Teléfono: 2222-1155</p>
+            <div id="map-galvaniza-venezuela" class="mapa"></div>
+        </div>
+    
+        <!-- Almacenes Vidrí en San Salvador -->
+        <div id="almacenes-vidri" class="empresa">
+            <h3>Almacenes Vidrí</h3>
+            <img src="img/Vidri.jpg" alt="Almacenes Vidrí">
+            <p>Almacenes Vidrí es una reconocida ferretería en El Salvador, fundada en 1917. Actualmente, cuenta con 16 sucursales distribuidas en la zona Metropolitana de San Salvador, así como en las zonas Paracentral, Occidental y Oriental del país.</p>
+            <p><strong>Teléfono:</strong> +503 2271 4033</p>
+            <p><strong>Horario de apertura:</strong> Lunes a sábado: 8:00 a.m. a 5:00 p.m.; Domingo: 9:00 a.m. a 5:00 p.m.</p>
+    
+            <h4>Sucursales:</h4>
+            <p><strong>Sucursal Venezuela</strong><br> Dirección: 21 Avenida Sur entre 12 y 14 Calle Poniente, San Salvador<br> Teléfono: +503 2271 4033</p>
+            <div id="map-vidri-venezuela" class="mapa"></div>
+    
+            <p><strong>Sucursal Escalón</strong><br> Dirección: Paseo General Escalón, San Salvador<br> Teléfono: +503 2264 4444</p>
+            <div id="map-vidri-escalon" class="mapa"></div>
+    
+            <p><strong>Sucursal Soyapango</strong><br> Dirección: Carretera de Oro, Soyapango<br> Teléfono: +503 2259 5555</p>
+            <div id="map-vidri-soyapango" class="mapa"></div>
+        </div>
+    
+        <!-- Ferretería Freund en San Salvador -->
+        <div id="ferreteria-freund" class="empresa">
+            <h3>Ferretería Freund</h3>
+            <img src="img/Freund.jpeg" alt="Ferretería Freund">
+            <p>Freund es una empresa salvadoreña fundada en 1913, dedicada al comercio detallista y mayorista de productos de ferretería, herramientas, pinturas, decoración, hogar, jardinería, materiales de construcción, eléctricos, iluminación, fontanería y herrajes.</p>
+            
+            <h4>Servicios y Productos:</h4>
+            <ul>
+                <li>Ferretería y Herramientas: Amplia gama de herramientas manuales y eléctricas.</li>
+                <li>Materiales de Construcción: Todo lo necesario para proyectos de construcción.</li>
+                <li>Pinturas y Decoración: Variedad de pinturas y artículos decorativos.</li>
+                <li>Jardinería: Productos para el cuidado y mantenimiento de jardines.</li>
+                <li>Electrodomésticos y Hogar: Artículos para el hogar y electrodomésticos.</li>
+            </ul>
+    
+            <h4>Servicios Adicionales:</h4>
+            <ul>
+                <li>Compras en línea: Con opciones de envío a domicilio y retiro en tienda.</li>
+                <li>Atención al cliente: A través de chat en línea y redes sociales.</li>
+            </ul>
+    
+            <h4>Sucursales:</h4>
+            <p><strong>Sucursal Escalón</strong><br> Dirección: 79 Av. Sur y Calle Juan José Cañas, Colonia Escalón, San Salvador<br> Teléfono: +503 2263 6666</p>
+            <div id="map-freund-escalon" class="mapa"></div>
+    
+            <p><strong>Sucursal Soyapango</strong><br> Dirección: Carretera de Oro, Soyapango<br> Teléfono: +503 2271 4444</p>
+            <div id="map-freund-soyapango" class="mapa"></div>
+        </div>
+    
+        <!-- Tigo en San Salvador -->
+        <div id="tigo" class="empresa">
+            <h3>Tigo</h3>
+            <img src="img/Tigo.jpg" alt="Tigo">
+            <p>Tigo es una empresa de telecomunicaciones que opera bajo la marca comercial de Millicom y comenzó sus operaciones en El Salvador en 1992. Los servicios ofrecidos incluyen telefonía móvil, internet de alta velocidad, televisión por cable y servicios financieros móviles.</p>
+            
+            <h4>Sucursales:</h4>
+            <p><strong>Tigo Metrocentro</strong><br> Dirección: Centro Comercial Metrocentro, San Salvador<br> Teléfono: 2205 5555</p>
+            <div id="map-tigo-metrocentro" class="mapa"></div>
+    
+            <p><strong>Tigo Galerías</strong><br> Dirección: Centro Comercial Galerías, San Salvador<br> Teléfono: 2205 5555</p>
+            <div id="map-tigo-galerias" class="mapa"></div>
+    
+            <p><strong>Tigo La Gran Vía</strong><br> Dirección: Centro Comercial La Gran Vía, San Salvador<br> Teléfono: 2205 5555</p>
+            <div id="map-tigo-gran-via" class="mapa"></div>
+    
+            <p><strong>Tigo Multiplaza</strong><br> Dirección: Centro Comercial Multiplaza, San Salvador<br> Teléfono: 2205 5555</p>
+            <div id="map-tigo-multiplaza" class="mapa"></div>
+    
+            <p><strong>Tigo Plaza Mundo</strong><br> Dirección: Centro Comercial Plaza Mundo, San Salvador<br> Teléfono: 2205 5555</p>
+            <div id="map-tigo-plaza-mundo" class="mapa"></div>
+        </div>
+    
+        <!-- Claro en San Salvador -->
+        <div id="claro" class="empresa">
+            <h3>Claro</h3>
+            <img src="img/claro.jpg" alt="Claro">
+            <p>Claro es una empresa de telecomunicaciones que forma parte del grupo mexicano América Móvil, propiedad del empresario Carlos Slim. Claro ofrece una amplia gama de servicios en varios países de América Latina, incluyendo El Salvador.</p>
+    
+            <h4>Servicios de Claro:</h4>
+            <ul>
+                <li>Telefonía móvil: Planes de voz y datos para teléfonos móviles.</li>
+                <li>Telefonía fija: Servicios de línea fija para hogares y empresas.</li>
+                <li>Internet: Conexiones de banda ancha tanto fijas como móviles.</li>
+                <li>Televisión por cable: Servicios de televisión por suscripción con una variedad de canales.</li>
+                <li>Servicios corporativos: Soluciones de comunicación y tecnología para empresas.</li>
+            </ul>
+    
+            <h4>Sucursales en San Salvador:</h4>
+            <p><strong>Sucursal Metrocentro</strong><br> Dirección: Centro Comercial Metrocentro, San Salvador<br> Teléfono: 2250 5555</p>
+            <div id="map-claro-metrocentro" class="mapa"></div>
+    
+            <p><strong>Sucursal Multiplaza</strong><br> Dirección: Centro Comercial Multiplaza, San Salvador<br> Teléfono: 2250 5555</p>
+            <div id="map-claro-multiplaza" class="mapa"></div>
+    
+            <p><strong>Sucursal Escalón</strong><br> Dirección: Paseo General Escalón, San Salvador<br> Teléfono: 2250 5555</p>
+            <div id="map-claro-escalon" class="mapa"></div>
+        </div>
+
+        <div id="nestle" class="empresa">
+            <h3>Nestlé</h3>
+            <img src="img/Nestle.jpg" alt="Nestlé">
+            <p>Nestlé es una multinacional suiza con una fuerte presencia en El Salvador. Ha invertido en expansión e infraestructura en el país, incluyendo un nuevo centro de distribución que convierte a El Salvador en un hub logístico regional.</p>
+        
+            <h4>Inversiones y Expansión</h4>
+            <ul>
+                <li><strong>Centro de Distribución:</strong> Nestlé ha inaugurado un nuevo centro de distribución en El Salvador, con una inversión de más de $10 millones.</li>
+                <li><strong>Sostenibilidad:</strong> Nestlé implementa programas de recuperación y reciclaje de plásticos, recuperando 649 toneladas de plástico en un año.</li>
+            </ul>
+        
+            <h4>Productos y Servicios</h4>
+            <ul>
+                <li><strong>Alimentos y Bebidas:</strong> Ofrece una variedad de productos, como café, lácteos, cereales y alimentos para bebés.</li>
+                <li><strong>Innovación y Calidad:</strong> Compromiso con mejorar la calidad de vida a través de la alimentación, enfocándose en sostenibilidad e innovación.</li>
+            </ul>
+        
+            <h4>Impacto Económico</h4>
+            <p>Nestlé contribuye significativamente al crecimiento económico en El Salvador, generando empleo y desarrollo en la región.</p>
+        
+            <h4>Sucursales:</h4>
+            <p><strong>Centro de Distribución Nejapa</strong><br> Dirección: Zona Industrial de Nejapa, San Salvador</p>
+            <div id="map-nestle-nejapa" class="mapa"></div>
+        
+            <p><strong>Oficinas Centrales</strong><br> Dirección: Edificio Zafiro, Avenida El Boquerón, Urbanización Madre Selva, Antiguo Cuscatlán, San Salvador</p>
+            <div id="map-nestle-oficinas" class="mapa"></div>
+        
+            <p><strong>Nestlé El Salvador S.A.</strong><br> Dirección: Carretera a Sonsonate, Km 29 1/2, Cantón El Capulín, San Salvador</p>
+            <div id="map-nestle-el-salvador" class="mapa"></div>
+        </div>
+
+        <!-- Farmacia San Nicolás en San Salvador -->
+        <div id="farmacia san nicolas" class="empresa">
+            <h3>Farmacia San Nicolás</h3>
+            <img src="img/Farmacia.jpeg" alt="Farmacia San Nicolás">
+            <p>Farmacias San Nicolás es una cadena de farmacias muy conocida en El Salvador, ofreciendo una amplia gama de productos y servicios.</p>
+
+            <h4>Servicios</h4>
+            <ul>
+                <li><strong>Medicamentos:</strong> Amplia variedad de medicamentos de prescripción y de venta libre.</li>
+                <li><strong>Dermocosmética:</strong> Productos para el cuidado de la piel.</li>
+                <li><strong>Conveniencia:</strong> Artículos de uso diario y productos de salud y bienestar.</li>
+                <li><strong>Telemedicina:</strong> Consultas médicas en línea.</li>
+            </ul>
+
+            <h4>Horarios de Atención</h4>
+            <p><strong>Lunes a domingo:</strong> 8:00 a.m. a 8:00 p.m.</p>
+
+            <h4>Ubicaciones de Sucursales en San Salvador:</h4>
+
+            <p><strong>Sucursal 25 Av. Norte</strong><br> Dirección: 25 Av. Norte, No. 712, Colonia Médica, San Salvador</p>
+            <div id="map-farmacia-25-av-norte" class="mapa"></div>
+
+            <p><strong>Sucursal 29 Calle Poniente</strong><br> Dirección: 29 Calle Poniente, No. 216, 1a Avenida Norte, San Salvador</p>
+            <div id="map-farmacia-29-calle-poniente" class="mapa"></div>
+
+            <p><strong>Sucursal 75 Avenida Norte</strong><br> Dirección: Prolongación Alameda Juan Pablo II y 75 Av. Norte, Centro Comercial Escalón II, Local 1-1 & 1-2, San Salvador</p>
+            <div id="map-farmacia-75-av-norte" class="mapa"></div>
+
+            <p><strong>Sucursal Metrocentro</strong><br> Dirección: Metrocentro, San Salvador</p>
+            <div id="map-farmacia-metrocentro" class="mapa"></div>
+
+            <p><strong>Sucursal Plaza Mundo</strong><br> Dirección: Centro Comercial Plaza Mundo, 2do nivel, Local #24, Soyapango</p>
+            <div id="map-farmacia-plaza-mundo" class="mapa"></div>
+        </div>
+
+        <!-- Agua Cristal en El Salvador -->
+        <div id="agua cristal" class="empresa">
+            <h3>Agua Cristal</h3>
+            <img src="img/Agua Cristal.jpg" alt="Agua Cristal">
+            <p>Agua Cristal es una marca líder de agua embotellada en El Salvador, conocida por su pureza y calidad.</p>
+
+            <h4>Historia y Calidad</h4>
+            <ul>
+                <li><strong>Trayectoria:</strong> Agua Cristal tiene más de 60 años en el mercado salvadoreño, ganándose la confianza de los consumidores.</li>
+                <li><strong>Proceso de Purificación:</strong> Utiliza un proceso exclusivo llamado Hydropure, que asegura la pureza del agua desde el inicio hasta la última gota.</li>
+                <li><strong>Certificaciones:</strong> Cuenta con certificaciones locales e internacionales, incluyendo la Water Quality Association y la NSF International.</li>
+            </ul>
+
+            <h4>Productos</h4>
+            <ul>
+                <li><strong>Presentaciones:</strong> Ofrecen una variedad de presentaciones, desde botellas personales hasta garrafones de 5 galones.</li>
+                <li><strong>Precios:</strong> El precio del garrafón de agua Cristal es de aproximadamente $2.85 USD, si ya tienes el garrafón vacío.</li>
+            </ul>
+
+            <h4>Servicios</h4>
+            <p><strong>Entrega a Domicilio:</strong> Agua Cristal ofrece servicio de entrega a domicilio para mayor comodidad.</p>
+
+            <h4>Ubicaciones de Oficinas</h4>
+
+            <p><strong>Centro de Distribución Nejapa</strong><br> Dirección: Zona Industrial de Nejapa, San Salvador</p>
+            <div id="map-agua-cristal-nejapa" class="mapa"></div>
+
+            <p><strong>Oficinas Centrales</strong><br> Dirección: Avenida Independencia, #526, San Salvador</p>
+            <div id="map-agua-cristal-oficinas-centrales" class="mapa"></div>
+        </div>
+        <!-- Coca-Cola en El Salvador -->
+        <div id="coca cola" class="empresa">
+            <h3>Coca-Cola</h3>
+            <img src="img/coca cola.jpg" alt="Coca-Cola en El Salvador">
+            <p>Coca-Cola es una de las marcas de bebidas más reconocidas y consumidas en el mundo, y en El Salvador no es la excepción.</p>
+
+            <h4>Historia y Presencia</h4>
+            <ul>
+                <li><strong>Historia:</strong> Coca-Cola se disfruta en El Salvador desde 1940, gracias a la Embotelladora Salvadoreña, ahora conocida como La Constancia AB-InBev.</li>
+                <li><strong>Productos:</strong> Ofrecen una variedad de productos, incluyendo Coca-Cola Sabor Original, Coca-Cola Sin Azúcar y Coca-Cola Sabor Ligero.</li>
+            </ul>
+
+            <h4>Servicios y Productos</h4>
+            <ul>
+                <li><strong>Bebidas:</strong> Además de las diferentes variantes de Coca-Cola, también ofrecen otras bebidas como Fanta, Sprite y jugos.</li>
+                <li><strong>Sostenibilidad:</strong> Coca-Cola está comprometida con la sostenibilidad y ha implementado programas para reducir su impacto ambiental.</li>
+            </ul>
+
+            <h4>Precios</h4>
+            <ul>
+                <li><strong>Botella de 2 litros:</strong> Aproximadamente $2.15 USD.</li>
+                <li><strong>Lata de 355 ml:</strong> Aproximadamente $0.60 USD.</li>
+            </ul>
+
+            <h4>Ubicaciones de Oficinas</h4>
+
+            <p><strong>Oficinas Centrales</strong><br> Dirección: Avenida Independencia, #526, San Salvador</p>
+            <div id="map-coca-cola-oficinas-centrales" class="mapa"></div>
+
+            <p><strong>Centro de Distribución Nejapa</strong><br> Dirección: Cerca de la lotificación Las Tres Américas, Nejapa, San Salvador</p>
+            <div id="map-coca-cola-nejapa" class="mapa"></div>
+        </div>
+        <!-- La Casa del Repuesto (LCR) en El Salvador -->
+        <div id="LCR" class="empresa">
+            <h3>La Casa del Repuesto (LCR)</h3>
+            <img src="img/LCR.jpg" alt="La Casa del Repuesto en El Salvador">
+            <p>La Casa del Repuesto es una empresa dedicada a la venta de repuestos automotrices y productos industriales en El Salvador.</p>
+
+            <h4>Servicios</h4>
+            <ul>
+                <li><strong>Repuestos Automotrices:</strong> Amplia variedad de repuestos para diferentes marcas y modelos de vehículos.</li>
+                <li><strong>Productos Industriales:</strong> Herramientas y equipos para uso industrial.</li>
+                <li><strong>Centros de Servicio:</strong> Asesoría técnica especializada y diagnóstico profesional para el mantenimiento de vehículos.</li>
+            </ul>
+
+            <h4>Horarios de Atención</h4>
+            <ul>
+                <li><strong>Lunes a viernes:</strong> 8:00 a.m. a 5:00 p.m.</li>
+                <li><strong>Sábados:</strong> 8:00 a.m. a 12:00 p.m.</li>
+            </ul>
+
+            <h4>Ubicaciones de Sucursales en San Salvador</h4>
+
+            <p><strong>Casa Matriz</strong><br> Dirección: Calle 5 de Noviembre, San Salvador<br> Teléfono: +503 2233 8080</p>
+            <div id="map-lcr-casa-matriz" class="mapa"></div>
+
+            <p><strong>Sucursal Constitución</strong><br> Dirección: Boulevard Constitución, San Salvador</p>
+            <div id="map-lcr-constitucion" class="mapa"></div>
+
+            <p><strong>Sucursal 29 Calle Poniente</strong><br> Dirección: 29 Calle Poniente, San Salvador</p>
+            <div id="map-lcr-29-calle" class="mapa"></div>
+
+            <p><strong>Sucursal Venezuela</strong><br> Dirección: Avenida Venezuela, San Salvador</p>
+            <div id="map-lcr-venezuela" class="mapa"></div>
+
+            <p><strong>Sucursal San Marcos</strong><br> Dirección: Carretera a Comalapa, San Marcos, San Salvador</p>
+            <div id="map-lcr-san-marcos" class="mapa"></div>
+        </div>
+
+        <!-- Galvanissa en Usulután -->
+        <div id="galvanissa-usulutan" class="empresa">
+            <h3>Galvanissa</h3>
+            <img src="img/Galvaniza.jpeg" alt="Galvanissa en Usulután">
+            <p>Galvanissa, parte del Grupo Ferromax, es una empresa líder en la fabricación y distribución de productos de hierro y techos en El Salvador. En el departamento de Usulután, Galvanissa cuenta con varias ubicaciones para atender a sus clientes.</p>
+
+            <h4>Servicios</h4>
+            <ul>
+                <li><strong>Fabricación y entrega inmediata:</strong> Productos como Polín GHT y cubiertas de techos ColorAlúm y ZincAlúm a longitud exacta.</li>
+                <li><strong>Asesoría técnica:</strong> Personal capacitado para brindar asesoría en proyectos de construcción.</li>
+            </ul>
+
+            <h4>Sucursales en Usulután</h4>
+
+            <p><strong>Sucursal Usulután</strong><br> 
+                Dirección: Km 119, Carretera del Litoral, Frente al Desvío de Santa Elena, Municipio de Santa María, Usulután<br> 
+                Teléfono: +503 2624-7834
+            </p>
+            <div id="map-galvanissa-usulutan" class="mapa"></div>
+
+            <p><strong>Sucursal Desvío a Santiago de María</strong><br> 
+                Dirección: Km 115 Carretera Litoral, frente al Desvío a Santiago de María, Usulután<br> 
+                Teléfono: +503 2624-9407
+            </p>
+            <div id="map-galvanissa-santiago-maria" class="mapa"></div>
+
+            <p><strong>Sucursal Villa El Triunfo</strong><br> 
+                Dirección: Km 104 Carretera Panamericana, Barrio la Cruz, 600 mts después del desvío a Santiago de María, El Triunfo, Usulután<br> 
+                Teléfono: +503 2663-1000
+            </p>
+            <div id="map-galvanissa-villa-el-triunfo" class="mapa"></div>
+        </div>
+
+
+                <!-- Super Selectos en Usulután -->
+        <div id="super selectos " class="empresa">
+            <h3>Super Selectos</h3>
+            <img src="img/Super Selectos.jpg" alt="Super Selectos en Usulután">
+            <p>Super Selectos es una de las cadenas de supermercados más grandes y populares en El Salvador. En el departamento de Usulután, cuenta con varias sucursales, incluyendo una en el centro de Usulután y otra en el nuevo centro comercial Plaza Mundo Usulután. Esta última es la sucursal número 115 de la cadena y fue inaugurada recientemente con una inversión de $4.5 millones.</p>
+
+            <h4>Servicios</h4>
+            <ul>
+                <li><strong>Productos de supermercado:</strong> Alimentos, bebidas, productos de limpieza, artículos para el hogar, entre otros.</li>
+                <li><strong>Ofertas y promociones:</strong> Super Selectos ofrece regularmente descuentos y promociones especiales en una variedad de productos.</li>
+                <li><strong>Compras en línea:</strong> Puedes realizar tus compras a través de su sitio web y optar por entrega a domicilio o retiro en tienda.</li>
+            </ul>
+
+            <h4>Ubicaciones de Sucursales en Usulután</h4>
+
+            <p><strong>Super Selectos Usulután Centro</strong><br> 
+                Dirección: 8HV7+59F, Usulután, El Salvador<br> 
+                Teléfono: +503 2267 6767
+            </p>
+            <div id="map-super-selectos-centro" class="mapa"></div>
+
+            <p><strong>Super Selectos Plaza Mundo Usulután</strong><br> 
+                Dirección: Kilómetro 119 de la carretera Litoral, Cantón Ojo de Agua, Usulután<br> 
+                Teléfono: +503 2267 6767<br> 
+                Descripción: Esta sucursal es la número 115 de la cadena y está ubicada en el recién inaugurado centro comercial Plaza Mundo Usulután. La inversión para esta sucursal fue de $4.5 millones y ha generado 100 empleos directos y 400 indirectos.
+            </p>
+            <div id="map-super-selectos-plaza-mundo" class="mapa"></div>
+        </div>
+
+                <!-- Campos Escobar S.A de C.V en Usulután -->
+        <div id="Campos Escobar S.A" class="empresa">
+            <h3>Campos Escobar S.A de C.V</h3>
+            <img src="img/venta de repuesto.jpeg" alt="Campos Escobar en Usulután">
+            <p>Campos Escobar S.A de C.V es una empresa ubicada en Usulután, El Salvador. Se especializa en la venta de repuestos y suministros para automóviles.</p>
+
+            <h4>Detalles de la Empresa</h4>
+            <ul>
+                <li><strong>Dirección:</strong> Km 112 Carretera El Litoral, Salida a San Miguel, Usulután, Usulután, El Salvador</li>
+                <li><strong>Industria:</strong> Suministros para automóviles y partes nuevas</li>
+                <li><strong>Nombre Comercial:</strong> Multirepuestos</li>
+                <li><strong>Fundación:</strong> 2012</li>
+                <li><strong>Empleados:</strong> Entre 50 y 100</li>
+            </ul>
+
+            <h4>Ubicación en el Mapa</h4>
+            <div id="map-campos-escobar-usulutan" class="mapa"></div>
+        </div>
+
+                <!-- Ferretería San Rafael en Usulután -->
+        <div id="ferreteria-san-rafael-usulutan" class="empresa">
+            <h3>Ferretería San Rafael</h3>
+            <img src="img/FERRETERIA.jpeg" alt="Ferretería San Rafael en Usulután">
+            <p>Ferretería San Rafael es una tienda ubicada en Usulután, El Salvador, que se especializa en la venta de materiales de construcción y productos de ferretería.</p>
+
+            <h4>Información Clave</h4>
+            <ul>
+                <li><strong>Dirección:</strong> CA-2, Usulután, Usulután, El Salvador</li>
+                <li><strong>Teléfono:</strong> +503 2662 1370</li>
+                <li><strong>Servicios:</strong> Venta de materiales de construcción, herramientas y productos de ferretería</li>
+            </ul>
+
+            <h4>Descripción</h4>
+            <p>Ferretería San Rafael es conocida por ser una opción confiable para la compra de materiales de construcción y productos de ferretería en la región. Ofrecen una amplia gama de productos para satisfacer las necesidades de sus clientes.</p>
+
+            <h4>Ubicación en el Mapa</h4>
+            <div id="map-ferreteria-san-rafael-usulutan" class="mapa"></div>
+        </div>
+
+      <!-- Funerales La Resurrección en Usulután -->
+        <div id="funeraria-la-resurreccion-usulutan" class="empresa">
+            <h3>Funerales La Resurrección</h3>
+            <img src="img/Funerraria.jpg" alt="Funerales La Resurrección" class="imagen-empresa">
+            <p>Funerales La Resurrección es una empresa en Usulután, El Salvador, que ofrece servicios funerarios completos.</p>
+
+            <h4>Información Clave</h4>
+            <ul>
+                <li><strong>Dirección:</strong> 3ra. Av. Norte y 6a. Calle Poniente No. 14, Barrio La Merced, Usulután, El Salvador</li>
+                <li><strong>Teléfono:</strong> +503 2662 3096</li>
+                <li><strong>Servicios:</strong> Capillas de velación y servicios funerarios completos</li>
+            </ul>
+
+            <h4>Ubicación en el Mapa</h4>
+            <div id="map-funerales-la-resurreccion-usulutan" class="mapa"></div>
+        </div>
+
+        <!-- Walmart en Santa Ana -->
+        <div id="walmart" class="empresa">
+            <h3>Walmart</h3>
+            <img src="img/Walmart.webp" alt="Walmart Santa Ana" class="imagen-empresa">
+            <p>Walmart es una corporación multinacional de origen estadounidense, fundada por Sam Walton en 1962. Se dedica principalmente a la venta de una amplia variedad de productos a precios bajos, incluyendo comestibles, ropa, electrónicos, artículos para el hogar, y más.</p>
+
+            <h4>Principales Actividades</h4>
+            <ul>
+                <li><strong>Venta al por menor:</strong> Walmart opera grandes almacenes de descuento y clubes de almacenes.</li>
+                <li><strong>Venta al por mayor:</strong> A través de Sam’s Club, ofrece productos en grandes cantidades a precios reducidos.</li>
+                <li><strong>Servicios Financieros:</strong> Incluye transferencias de dinero, pago de facturas, y otros servicios financieros.</li>
+            </ul>
+
+            <h4>Misión y Visión</h4>
+            <ul>
+                <li><strong>Misión:</strong> Ser la mejor tienda detallista en beneficio de sus clientes, ofreciendo productos de calidad a precios bajos.</li>
+                <li><strong>Visión:</strong> Mantener siempre un amplio catálogo de productos y servicios, asegurando la satisfacción del cliente.</li>
+            </ul>
+
+            <h4>Sucursal en Santa Ana</h4>
+            <ul>
+                <li><strong>Dirección:</strong> Prolongación Avenida Independencia, Boulevard Los 44, Cantón Loma Alta, Santa Ana</li>
+                <li><strong>Horario:</strong> Abierto todos los días de 7:00 a.m. a 10:00 p.m.</li>
+            </ul>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li>Abarrotes y Productos de Consumo Diario</li>
+                <li>Electrónica y Electrodomésticos</li>
+                <li>Ropa y Accesorios</li>
+                <li>Farmacia</li>
+                <li>Centro de Jardinería</li>
+                <li>Servicios Financieros</li>
+            </ul>
+
+            <h4>Ubicación en el Mapa</h4>
+            <div id="map-walmart-santa-ana" class="mapa"></div>
+        </div>
+        <!-- Maxi Despensa en Santa Ana -->
+        <div id="Maxi Despensa" class="empresa">
+            <h3>Maxi Despensa</h3>
+            <img src="img/Maxi.webp" alt="Maxi Despensa Santa Ana" class="imagen-empresa">
+            <p>Maxi Despensa es una cadena de supermercados que forma parte del grupo Walmart. Se dedica a ofrecer una amplia gama de productos a precios bajos, en un espacio amplio y cómodo.</p>
+
+            <h4>Principales Actividades</h4>
+            <ul>
+                <li><strong>Venta de Abarrotes:</strong> Productos de consumo diario como alimentos, bebidas, y productos de limpieza.</li>
+                <li><strong>Electrónica y Electrodomésticos:</strong> Artículos como televisores, refrigeradores, y otros electrodomésticos.</li>
+                <li><strong>Ropa y Accesorios:</strong> Prendas de vestir para toda la familia.</li>
+                <li><strong>Línea Blanca:</strong> Productos como lavadoras, secadoras, y estufas.</li>
+                <li><strong>Productos de Cuidado Personal y del Hogar:</strong> Artículos de higiene personal y productos para el mantenimiento del hogar.</li>
+            </ul>
+
+            <h4>Horario</h4>
+            <ul>
+                <li>Lunes a Jueves: 8:00 a.m. - 8:00 p.m.</li>
+                <li>Viernes: 8:00 a.m. - 7:00 p.m.</li>
+                <li>Sábado y Domingo: 8:00 a.m. - 7:00 p.m.</li>
+            </ul>
+
+            <h4>Sucursales de Maxi Despensa en Santa Ana</h4>
+            
+            <h5>Maxi Despensa Santa Ana</h5>
+            <ul>
+                <li><strong>Dirección:</strong> Pje 15 De Septiembre, Santa Ana, El Salvador</li>
+                <li><strong>Teléfono:</strong> +503 2440 3255</li>
+                <li><strong>Horario:</strong> 
+                    <ul>
+                        <li>Lunes a Jueves: 8:00 a.m. - 8:00 p.m.</li>
+                        <li>Viernes: 8:00 a.m. - 7:00 p.m.</li>
+                        <li>Sábado y Domingo: 8:00 a.m. - 7:00 p.m.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>Ubicación en el Mapa - Maxi Despensa Santa Ana</h4>
+            <div id="map-maxi-despensa-santa-ana" class="mapa"></div>
+
+            <h5>Maxi Despensa San Juan</h5>
+            <ul>
+                <li><strong>Dirección:</strong> Av Independencia Sur, Santa Ana, El Salvador</li>
+                <li><strong>Teléfono:</strong> +503 2440 3253</li>
+                <li><strong>Horario:</strong>
+                    <ul>
+                        <li>Lunes a Jueves: 8:00 a.m. - 8:00 p.m.</li>
+                        <li>Viernes: 8:00 a.m. - 7:00 p.m.</li>
+                        <li>Sábado y Domingo: 8:00 a.m. - 7:00 p.m.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>Ubicación en el Mapa - Maxi Despensa San Juan</h4>
+            <div id="map-maxi-despensa-san-juan" class="mapa"></div>
+        </div>
+
+        <!-- Súper Selectos en Santa Ana -->
+        <div id="Super Selectos" class="empresa">
+            <h3>Súper Selectos</h3>
+            <img src="img/Super Selectos.jpg" alt="Súper Selectos" class="imagen-empresa">
+            <p>Súper Selectos es una cadena de supermercados muy conocida en El Salvador, y tiene varias sucursales en el departamento de Santa Ana.</p>
+
+            <h4>Sucursales de Súper Selectos en Santa Ana</h4>
+
+            <h5>Súper Selectos Metrocentro Santa Ana</h5>
+            <ul>
+                <li><strong>Dirección:</strong> Colonia Loma Linda, final avenida Independencia Sur y by pass, Santa Ana, El Salvador</li>
+                <li><strong>Teléfono:</strong> +503 2504 5555</li>
+                <li><strong>Horario:</strong>
+                    <ul>
+                        <li>Lunes a Sábado: 9:00 a.m. - 7:00 p.m.</li>
+                        <li>Domingo: 9:00 a.m. - 7:00 p.m.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>Ubicación en el Mapa - Súper Selectos Metrocentro Santa Ana</h4>
+            <div id="map-super-selectos-metrocentro" class="mapa"></div>
+
+            <h5>Súper Selectos Candelaria de La Frontera</h5>
+            <ul>
+                <li><strong>Dirección:</strong> Candelaria de La Frontera, Santa Ana, El Salvador</li>
+                <li><strong>Teléfono:</strong> +503 2267 6767</li>
+                <li><strong>Horario:</strong>
+                    <ul>
+                        <li>Lunes a Sábado: 9:00 a.m. - 7:00 p.m.</li>
+                        <li>Domingo: 9:00 a.m. - 7:00 p.m.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>Ubicación en el Mapa - Súper Selectos Candelaria de La Frontera</h4>
+            <div id="map-super-selectos-candelaria" class="mapa"></div>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li>Abarrotes y Productos de Consumo Diario</li>
+                <li>Electrónica y Electrodomésticos</li>
+                <li>Ropa y Accesorios</li>
+                <li>Productos de Limpieza y Cuidado Personal</li>
+                <li>Panadería y Pastelería</li>
+                <li>Carnicería y Pescadería</li>
+            </ul>
+        </div>
+        <!-- Textiles de Exportación S.A. -->
+        <div id="textiles exportacion" class="empresa">
+            <h3>Textiles de Exportación S.A.</h3>
+            <img src="img/Textiles.webp" alt="Textiles de Exportación" class="imagen-empresa">
+            <p>Textiles de Exportación S.A. es una empresa ubicada en Santa Ana, El Salvador, que se dedica a la fabricación y exportación de productos textiles.</p>
+
+            <h4>Información Clave</h4>
+            <ul>
+                <li><strong>Industria:</strong> Textil y confección</li>
+                <li><strong>Productos:</strong> Principalmente camisetas, suéteres, y otros artículos de ropa</li>
+                <li><strong>Exportaciones:</strong> Contribuye significativamente a las exportaciones de textiles de El Salvador</li>
+            </ul>
+
+            <h4>Descripción</h4>
+            <p>La empresa forma parte de un sector vital para la economía salvadoreña, representando una parte importante de las exportaciones del país. El sector textil y de confección en El Salvador es conocido por su alta calidad y competitividad en el mercado internacional.</p>
+
+            <h4>Horarios</h4>
+            <ul>
+                <li>Lunes a Viernes: 10:00 - 14:00 / 16:30 - 20:00</li>
+                <li>Sábado: 10:30 - 14:15</li>
+            </ul>
+
+            <h4>Sucursales</h4>
+            
+            <h5>Tienda Detalle</h5>
+            <ul>
+                <li><strong>Dirección:</strong> Moles, 22, 08002 Barcelona</li>
+                <li><strong>Teléfono:</strong> 933 015 175</li>
+                <li><strong>WhatsApp:</strong> 696 857 604</li>
+            </ul>
+
+            <h5>Almacén y Tienda Mayor</h5>
+            <ul>
+                <li><strong>Dirección:</strong> Av. Eduard Maristany, 392-394, 08918 Badalona</li>
+                <li><strong>Teléfono:</strong> 933 020 948</li>
+                <li><strong>WhatsApp:</strong> 630 012 499</li>
+            </ul>
+
+            <h4>Ubicación en el Mapa - Textiles de Exportación S.A.</h4>
+            <div id="map-textiles-exportacion" class="mapa"></div>
+        </div>
+        <!-- La Casa del Repuesto -->
+        <div id="casa del repuesto" class="empresa">
+            <h3>La Casa del Repuesto</h3>
+            <img src="img/LCR.jpg" alt="La Casa del Repuesto" class="imagen-empresa">
+            <p>La Casa del Repuesto en Santa Ana se especializa en la venta de repuestos y accesorios para vehículos. Ofrecen una amplia gama de productos, incluyendo frenos, motores, sistemas eléctricos, herramientas, suspensión y embrague.</p>
+
+            <h4>Información de Contacto</h4>
+            <ul>
+                <li><strong>Dirección:</strong> Calle Aldea San Antonio, Final 25 Calle Pte, Bo San Antonio, contiguo a Pasadena, Santa Ana, El Salvador</li>
+                <li><strong>Teléfono:</strong> 2440 1251</li>
+                <li><strong>Correo Electrónico:</strong> <a href="mailto:ventas@lcrelsalvador.com">ventas@lcrelsalvador.com</a></li>
+                <li><strong>Sitio Web:</strong> <a href="http://lcrelsalvador.com">lcrelsalvador.com</a></li>
+            </ul>
+
+            <h4>Horarios de Atención</h4>
+            <ul>
+                <li>Lunes a Viernes: 8:00 AM - 5:00 PM</li>
+                <li>Sábado: 8:00 AM - 12:00 PM</li>
+            </ul>
+
+            <h4>Ubicación de Locales</h4>
+            <ul>
+                <li><strong>Dirección:</strong> Calle Aldea San Antonio, Final 25 Calle Pte, Bo San Antonio, contiguo a Pasadena, Santa Ana, El Salvador</li>
+                <li><strong>Teléfono:</strong> 2440 1251</li>
+                <li><strong>Correo Electrónico:</strong> <a href="mailto:ventas@lcrelsalvador.com">ventas@lcrelsalvador.com</a></li>
+                <li><strong>Sitio Web:</strong> <a href="http://lcrelsalvador.com">lcrelsalvador.com</a></li>
+            </ul>
+
+            <h4>Ubicación en el Mapa - La Casa del Repuesto</h4>
+            <div id="map-casa-del-repuesto" class="mapa"></div>
+        </div>
+  
+        <!-- Industria de la Confección Americana Salvadoreña S.A. de C.V. (INCAS) -->
+        <div id="Industria de la Confección Americana Salvadoreña S.A. de C.V. INCAS" class="empresa">
+            <h3>Industria de la Confección Americana Salvadoreña S.A. de C.V. (INCAS)</h3>
+            <img src="img/reciclaje2.jpg" alt="Industria de la Confección Americana Salvadoreña" class="imagen-empresa">
+            <p>INCAS se especializa en la fabricación de telas y productos textiles, especialmente tejidos de algodón. La empresa se dedica a la producción de telas para camisas y otros productos textiles, formando parte del sector de los molinos de telas y textiles.</p>
+
+            <h4>Servicios</h4>
+            <ul>
+                <li><strong>Fabricación de Telas:</strong> Producción de tejidos de algodón y otros materiales.</li>
+                <li><strong>Producción Textil:</strong> Confección de productos textiles variados.</li>
+            </ul>
+
+            <h4>Información de Contacto</h4>
+            <ul>
+                <li><strong>Dirección:</strong> Km. 69 Carretera a Metapán, Santa Ana, El Salvador</li>
+                <li><strong>Teléfono:</strong> No disponible públicamente</li>
+            </ul>
+
+            <h4>Ubicación en el Mapa - INCAS</h4>
+            <div id="map-incas" class="mapa"></div>
+        </div>
+
+        <!-- Claro en Santa Ana -->
+        <div id="Claro" class="empresa">
+            <h3>Claro</h3>
+            <img src="img/claro.jpg" alt="Claro en Santa Ana" class="imagen-empresa">
+            <p>Claro es una de las principales empresas de telecomunicaciones en El Salvador, ofreciendo una amplia gama de servicios que incluyen telefonía móvil, internet, televisión por cable y servicios empresariales.</p>
+
+            <h4>Servicios</h4>
+            <ul>
+                <li><strong>Telefonía Móvil:</strong> Planes pospago y prepago, con cobertura nacional e internacional.</li>
+                <li><strong>Internet:</strong> Servicios de internet residencial y móvil, con opciones de alta velocidad.</li>
+                <li><strong>Televisión por Cable:</strong> Paquetes de TV con canales nacionales e internacionales, incluyendo opciones de HD.</li>
+                <li><strong>Servicios Empresariales:</strong> Soluciones de telecomunicaciones para negocios, como internet dedicado, telefonía IP y servicios en la nube.</li>
+            </ul>
+
+            <h4>Horarios de Atención</h4>
+            <ul>
+                <li><strong>Lunes a Viernes:</strong> 8:00 a.m. a 5:00 p.m.</li>
+                <li><strong>Sábados:</strong> 8:00 a.m. a 12:00 p.m.</li>
+                <li><strong>Domingos:</strong> Cerrado</li>
+            </ul>
+
+            <h4>Ubicaciones de Sucursales en Santa Ana</h4>
+
+            <p><strong>Sucursal Principal</strong><br>
+            Dirección: 2ª Calle Oriente y 2ª Avenida Sur, Barrio Santa Cruz, Santa Ana<br>
+            Teléfono: +503 2250 5555</p>
+            <div id="map-claro-principal" class="mapa"></div>
+
+            <p><strong>Sucursal Calle Libertad Oriente</strong><br>
+            Dirección: Calle Libertad Oriente y 5ª Avenida Norte, Santa Ana</p>
+            <div id="map-claro-libertad" class="mapa"></div>
+
+            <p><strong>Centro de Atención al Cliente (CAC) Las Ramblas</strong><br>
+            Dirección: Centro Comercial Las Ramblas, entre carretera Panamericana y carretera hacia Chalchuapa, frente al redondel Santa María, locales 4 y 5, contiguo a Food Court</p>
+            <div id="map-claro-ramblas" class="mapa"></div>
+        </div>
+
+
+                <!-- Tigo en Santa Ana -->
+        <div id="Tigo" class="empresa">
+            <h3>Tigo</h3>
+            <img src="img/Tigo.jpg" alt="Tigo " class="imagen-empresa">
+            <p>Tigo es una de las principales empresas de telecomunicaciones en El Salvador, ofreciendo una variedad de servicios que incluyen telefonía móvil, internet, televisión por cable y servicios empresariales.</p>
+
+            <h4>Servicios</h4>
+            <ul>
+                <li><strong>Telefonía Móvil:</strong> Planes pospago y prepago, con cobertura nacional e internacional.</li>
+                <li><strong>Internet:</strong> Servicios de internet residencial y móvil, con opciones de alta velocidad.</li>
+                <li><strong>Televisión por Cable:</strong> Paquetes de TV con canales nacionales e internacionales, incluyendo opciones de HD.</li>
+                <li><strong>Servicios Empresariales:</strong> Soluciones de telecomunicaciones para negocios, como internet dedicado, telefonía IP y servicios en la nube.</li>
+            </ul>
+
+            <h4>Horarios de Atención</h4>
+            <ul>
+                <li><strong>Metrocentro Santa Ana:</strong> Lunes a Sábado: 9:00 AM - 6:00 PM; Domingo: 10:00 AM - 4:00 PM</li>
+                <li><strong>Santa Ana Centro:</strong> Lunes a Viernes: 8:00 AM - 5:00 PM; Sábado: 9:00 AM - 1:00 PM</li>
+            </ul>
+
+            <h4>Ubicaciones de Sucursales en Santa Ana</h4>
+
+            <p><strong>Sucursal Metrocentro Santa Ana</strong><br>
+            Dirección: Centro Comercial Metrocentro Santa Ana, Nivel 2, Fase 2, Locales 262B-262C, Santa Ana, El Salvador</p>
+            <div id="map-tigo-metrocentro" class="mapa"></div>
+
+            <p><strong>Sucursal Santa Ana Centro</strong><br>
+            Dirección: 9na Calle Poniente entre 2da y 4ta Avenida Sur, Santa Ana, El Salvador</p>
+            <div id="map-tigo-centro" class="mapa"></div>
+        </div>
+
+        <!-- Tigo en Chalatenango -->
+        <div id="tigo Chalatenango" class="empresa">
+            <h3>Tigo</h3>
+            <img src="img/Tigo.jpg" alt="Tigo en Chalatenango" class="imagen-empresa">
+            <p>Tigo tiene una presencia en Chalatenango, ofreciendo servicios de telecomunicaciones como internet, telefonía móvil y televisión por cable.</p>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Internet:</strong> Conexiones de alta velocidad para hogares y negocios.</li>
+                <li><strong>Telefonía Móvil:</strong> Planes de datos y llamadas para diferentes necesidades.</li>
+                <li><strong>Televisión por Cable:</strong> Amplia selección de canales nacionales e internacionales.</li>
+                <li><strong>Recargas y Roaming:</strong> Servicios de recarga y roaming para mantenerte conectado en cualquier lugar.</li>
+            </ul>
+
+            <h4>Horarios de Atención</h4>
+            <ul>
+                <li><strong>Lunes a Viernes:</strong> 8:00 AM - 4:00 PM</li>
+                <li><strong>Sábados:</strong> 8:00 AM - 3:00 PM</li>
+                <li><strong>Domingos:</strong> Cerrado</li>
+            </ul>
+
+            <h4>Ubicaciones de Sucursales en Chalatenango</h4>
+
+            <p><strong>Sucursal Principal</strong><br>
+            Dirección: Barrio El Centro, Edificio María Julia, local #11</p>
+            <div id="map-tigo-principal" class="mapa"></div>
+
+            <p><strong>Sucursal Barrio Las Flores</strong><br>
+            Dirección: Calle San Martín #17, a un costado de la Alcaldía Municipal</p>
+            <div id="map-tigo-las-flores" class="mapa"></div>
+        </div>
+
+        <!-- Claro en Chalatenango -->
+        <div id="claro Chalatenango" class="empresa">
+            <h3>Claro</h3>
+            <img src="img/claro.jpg" alt="Claro en Chalatenango" class="imagen-empresa">
+            <p>Claro es una de las principales empresas de telecomunicaciones en El Salvador, ofreciendo una amplia gama de servicios.</p>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Internet:</strong> Conexiones de alta velocidad para hogares y negocios.</li>
+                <li><strong>Telefonía Móvil:</strong> Planes de datos y llamadas para diferentes necesidades.</li>
+                <li><strong>Televisión por Cable:</strong> Amplia selección de canales nacionales e internacionales.</li>
+                <li><strong>Telefonía Fija:</strong> Servicios de telefonía para hogares y empresas.</li>
+                <li><strong>Recargas y Roaming:</strong> Servicios de recarga y roaming para mantenerte conectado en cualquier lugar.</li>
+            </ul>
+
+            <h4>Horarios de Atención</h4>
+            <ul>
+                <li><strong>Lunes a Viernes:</strong> 8:00 AM - 5:00 PM</li>
+                <li><strong>Sábados:</strong> 8:00 AM - 4:00 PM</li>
+                <li><strong>Domingos:</strong> Cerrado</li>
+            </ul>
+
+            <h4>Ubicaciones de Sucursales en Chalatenango</h4>
+
+            <p><strong>Sucursal Principal</strong><br>
+            Dirección: Calle San Martín, Barrio El Centro</p>
+            <div id="map-claro-principal" class="mapa"></div>
+
+            <p><strong>Sucursal La Palma</strong><br>
+            Dirección: Bo. El Centro, Calle hacia San Salvador, La Palma</p>
+            <div id="map-claro-la-palma" class="mapa"></div>
+
+            <p><strong>Sucursal Tejutla</strong><br>
+            Dirección: Carretera Troncal Del Norte #32, Tejutla</p>
+            <div id="map-claro-tejutla" class="mapa"></div>
+        </div>
+
+        <div id="super-selectos-chalatenango" class="empresa">
+            <h3>Super Selectos</h3>
+            <img src="img/Super Selectos.jpg" alt="Super Selectos en Chalatenango" class="imagen-empresa">
+            <p>Super Selectos es una de las cadenas de supermercados más grandes y reconocidas en El Salvador. Se dedica a la venta de una amplia variedad de productos, incluyendo alimentos, bebidas, productos de limpieza, artículos para el hogar, y más. Su objetivo es ofrecer productos de calidad a precios accesibles, brindando una excelente experiencia de compra a sus clientes.</p>
+        
+            <h4>Horarios de Atención</h4>
+            <ul>
+                <li><strong>Lunes a Domingo:</strong> 7:00 AM - 10:00 PM</li>
+            </ul>
+        
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Supermercado:</strong> Venta de productos frescos, enlatados, congelados, y más.</li>
+                <li><strong>Panadería:</strong> Productos de panadería y repostería recién horneados.</li>
+                <li><strong>Carnicería:</strong> Carne fresca y de calidad.</li>
+                <li><strong>Frutería y Verdulería:</strong> Frutas y verduras frescas.</li>
+                <li><strong>Productos de Limpieza:</strong> Artículos para la limpieza del hogar.</li>
+                <li><strong>Artículos para el Hogar:</strong> Variedad de productos para el hogar.</li>
+            </ul>
+        
+            <h4>Sucursal Principal en Chalatenango</h4>
+            <p><strong>Dirección:</strong> Calle Morazán, Chalatenango</p>
+            <div id="map-super-selectos" class="mapa"></div>
+        </div>
+
+        <!-- CAESS en Chalatenango -->
+        <div id="Caess" class="empresa">
+            <h3>CAESS (Compañía de Alumbrado Eléctrico de San Salvador)</h3>
+            <img src="img/Caees.jpg" alt="CAESS en Chalatenango" class="imagen-empresa">
+            <p>CAESS es una empresa dedicada a la distribución y comercialización de energía eléctrica en El Salvador.</p>
+
+            <h4>Horarios de Atención</h4>
+            <ul>
+                <li><strong>Lunes a Viernes:</strong> 8:00 AM - 5:00 PM</li>
+                <li><strong>Sábados:</strong> 8:00 AM - 12:00 PM</li>
+                <li><strong>Domingos:</strong> Cerrado</li>
+            </ul>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Distribución de Energía Eléctrica:</strong> Suministro de electricidad a hogares, negocios y comunidades.</li>
+                <li><strong>Atención al Cliente:</strong> Trámites y consultas sobre el servicio de energía eléctrica.</li>
+                <li><strong>Pagos y Facturación:</strong> Opciones para realizar pagos y consultas de facturas en línea y en puntos de pago autorizados.</li>
+                <li><strong>Mantenimiento de la Red Eléctrica:</strong> Trabajos de inversión y mantenimiento para garantizar un suministro eléctrico seguro y confiable.</li>
+            </ul>
+
+            <h4>Sucursales en Chalatenango</h4>
+            
+            <h5>Sucursal Principal</h5>
+            <p><strong>Dirección:</strong> Calle Morazán, Chalatenango</p>
+            <p><strong>Horarios:</strong> Lunes a Viernes: 8:00 AM - 5:00 PM, Sábados: 8:00 AM - 12:00 PM, Domingos: Cerrado</p>
+            <div id="map-caess-principal" class="mapa" style="height: 300px; width: 100%;"></div>
+            
+            <h5>Sucursal Tejutla</h5>
+            <p><strong>Dirección:</strong> Mall del Sol, Carretera Troncal del Norte Kilómetro 51, Tejutla</p>
+            <p><strong>Horarios:</strong> Lunes a Viernes: 8:00 AM - 12:00 PM y 1:00 PM - 5:00 PM, Sábados: 8:00 AM - 12:00 PM</p>
+            <div id="map-caess-tejutla" class="mapa" style="height: 300px; width: 100%;"></div>
+        </div>
+
+                <!-- Electrónica 2000 en Chalatenango -->
+        <div id="Electronica-2000" class="empresa">
+            <h3>Electrónica 2000</h3>
+            <img src="img/Electrica 2000.jpeg" alt="Electrónica 2000 en Chalatenango" class="imagen-empresa">
+            <p>Electrónica 2000 se dedica a la venta al por mayor de ordenadores, equipos periféricos y programas de informática. También ofrece una variedad de productos electrónicos y repuestos para electrodomésticos y televisores.</p>
+
+            <h4>Horarios de Atención</h4>
+            <ul>
+                <li><strong>Lunes a Viernes:</strong> 8:00 AM - 5:00 PM</li>
+                <li><strong>Sábados:</strong> 8:00 AM - 12:00 PM</li>
+                <li><strong>Domingos:</strong> Cerrado</li>
+            </ul>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Venta de Electrónica:</strong> Incluye ordenadores, equipos periféricos y programas de informática.</li>
+                <li><strong>Repuestos y Accesorios:</strong> Para electrodomésticos y televisores.</li>
+                <li><strong>Servicio Técnico:</strong> Reparación y mantenimiento de equipos electrónicos.</li>
+            </ul>
+
+            <h4>Ubicación</h4>
+            <p><strong>Dirección:</strong> 1a. Calle Oriente, Chalatenango</p>
+            <p><strong>Teléfono:</strong> Puedes contactar a la empresa al 7941 97431.</p>
+            <div id="map-electronica-2000" class="mapa" style="height: 300px; width: 100%;"></div>
+        </div>
+
+        <div id="SociedadCooperativaDeCafetaleros" class="empresa">
+            <h3>Sociedad Cooperativa de Cafetaleros Los Ausoles de R.L. (COAUSOLES)</h3>
+            <img src="img/cafetalero.jpeg" alt="Sociedad Cooperativa de Cafetaleros" class="imagen-empresa">
+            <p>COAUSOLES se dedica a la producción, procesamiento y exportación de café, utilizando técnicas sostenibles y respetuosas con el medio ambiente. La cooperativa tiene más de 44 años de experiencia en la industria cafetalera.</p>
+        
+            <h4>Horarios de Atención</h4>
+            <ul>
+                <li><strong>Lunes a Viernes:</strong> 7:30 AM - 12:00 PM y 1:00 PM - 4:30 PM</li>
+                <li><strong>Sábados:</strong> 7:30 AM - 12:00 PM</li>
+                <li><strong>Domingos:</strong> Cerrado</li>
+            </ul>
+        
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Producción de Café:</strong> Incluye cafés naturales, pergamino lavado, pergamino honey, y más.</li>
+                <li><strong>Procesamiento:</strong> Trilla, clasificación, limpieza y tostado de café.</li>
+                <li><strong>Exportación:</strong> Exportación de cafés de especialidad con atributos únicos.</li>
+                <li><strong>Abonos Orgánicos:</strong> Producción de abonos orgánicos para la autosostenibilidad.</li>
+                <li><strong>Cosecha:</strong> Cosecha de café, cacao y otras frutas y verduras.</li>
+            </ul>
+        
+            <h4>Ubicación</h4>
+            <p><strong>Dirección:</strong> Km. 101 1/2 Carretera a Las Chinamas, Cantón Llano La Laguna, Ahuachapán, El Salvador</p>
+            <div id="map-coausoles" class="mapa"></div>
+        </div>
+
+        <!-- Lausanne S.A. de C.V. (Café Monte Sión) en Ahuachapán -->
+        <div id="Lausanne" class="empresa">
+            <h3>Lausanne S.A. de C.V. (Café Monte Sión)</h3>
+            <img src="img/lausame.jpeg" alt="Café Monte Sión en Ahuachapán" class="imagen-empresa">
+            <p>Lausanne S.A. de C.V. se dedica a la producción y exportación de café de alta calidad y sostenible. Fundada en 1978, la empresa ha sido reconocida por su compromiso con la calidad y la sostenibilidad.</p>
+
+            <h4>Horarios de Atención</h4>
+            <ul>
+                <li><strong>Lunes a Viernes:</strong> 7:30 AM - 12:00 PM y 1:00 PM - 4:30 PM</li>
+                <li><strong>Sábados:</strong> 7:30 AM - 12:00 PM</li>
+                <li><strong>Domingos:</strong> Cerrado</li>
+            </ul>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Producción de Café:</strong> Cultivo y procesamiento de café de alta calidad.</li>
+                <li><strong>Exportación:</strong> Exportación de café sostenible a mercados internacionales.</li>
+                <li><strong>Certificaciones:</strong> La empresa cuenta con certificaciones como Rainforest Alliance, que garantizan prácticas sostenibles.</li>
+            </ul>
+
+            <h4>Ubicación</h4>
+            <p><strong>Dirección:</strong> Beneficio Maranatha, Cantón Lomas de Alarcón, Atiquizaya, Ahuachapán, El Salvador</p>
+            <div id="map-lausanne" class="mapa"></div>
+        </div>
+
+                <!-- Hiltex S.A. de C.V. en Ahuachapán -->
+        <div id="hiltex" class="empresa">
+            <h3>Hiltex S.A. de C.V.</h3>
+            <img src="img/hilo.avif" alt="Hiltex S.A. de C.V. en Ahuachapán" class="imagen-empresa">
+            <p>Hiltex S.A. de C.V. se especializa en la fabricación de hilos, fibras y textiles de alta calidad. La empresa es conocida por su compromiso con la innovación y la calidad en sus productos.</p>
+
+            <h4>Horarios de Atención</h4>
+            <ul>
+                <li><strong>Lunes a Viernes:</strong> 7:30 AM - 5:00 PM</li>
+                <li><strong>Sábados:</strong> 8:00 AM - 12:00 PM</li>
+                <li><strong>Domingos:</strong> Cerrado</li>
+            </ul>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Producción de Hilos y Fibras:</strong> Fabricación de hilos y fibras para diversas aplicaciones textiles.</li>
+                <li><strong>Textiles:</strong> Producción de tejidos y otros productos textiles.</li>
+                <li><strong>Innovación y Desarrollo:</strong> Investigación y desarrollo de nuevos productos y técnicas de fabricación.</li>
+            </ul>
+
+            <h4>Ubicación</h4>
+            <p><strong>Dirección:</strong> Km. 99 1/2 Carretera a San Salvador, Ahuachapán, El Salvador</p>
+            <div id="map-hiltex" class="mapa" style="height: 300px; width: 100%;"></div>
+        </div>
+
+        <!-- Astrovisión S.A. de C.V. en Ahuachapán -->
+        <div id="Astrovision" class="empresa">
+            <h3>Astrovisión S.A. de C.V.</h3>
+            <img src="img/venta cable.jpg" alt="astrovisión S.A. de C.V. en Ahuachapán" class="imagen-empresa">
+            <p>Astrovisión S.A. de C.V. se especializa en servicios de tecnología, incluyendo televisión por cable y servicios de internet.</p>
+        
+            <h4>Horarios de Atención</h4>
+            <ul>
+                <li><strong>Lunes a Viernes:</strong> 8:00 AM - 5:00 PM</li>
+                <li><strong>Sábados:</strong> 8:00 AM - 12:00 PM</li>
+                <li><strong>Domingos:</strong> Cerrado</li>
+            </ul>
+        
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Televisión por Cable:</strong> Amplia selección de canales nacionales e internacionales.</li>
+                <li><strong>Internet de Alta Velocidad:</strong> Conexiones rápidas y confiables para hogares y negocios.</li>
+                <li><strong>Soporte Técnico:</strong> Asistencia técnica para resolver problemas con los servicios contratados.</li>
+            </ul>
+        
+            <h4>Ubicación</h4>
+            <p><strong>Dirección:</strong> Ciudad Pacífico, Calle Principal #14, Ahuachapán, El Salvador</p>
+            <div id="map-astrovision" class="mapa" style="height: 300px; width: 100%;"></div>
+        </div>
+        <div id="Claro" class="empresa" style="display: none;">
+            <h3>Claro</h3>
+            <img src="img/claro.jpg" alt="Claro en Ahuachapán" class="imagen-empresa">
+            <p>Claro es una de las principales empresas de telecomunicaciones en América Latina, propiedad de América Móvil. Ofrece una amplia gama de servicios de telecomunicaciones y entretenimiento.</p>
+        
+            <h4>Horarios de Atención</h4>
+            <ul>
+                <li><strong>Lunes a Viernes:</strong> 8:00 AM - 5:00 PM</li>
+                <li><strong>Sábados:</strong> 8:00 AM - 12:00 PM</li>
+                <li><strong>Domingos:</strong> Cerrado</li>
+            </ul>
+        
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Telefonía Móvil:</strong> Planes de datos y llamadas para diferentes necesidades.</li>
+                <li><strong>Internet:</strong> Conexiones de alta velocidad para hogares y negocios.</li>
+                <li><strong>Televisión por Cable:</strong> Amplia selección de canales nacionales e internacionales.</li>
+                <li><strong>Soporte Técnico:</strong> Asistencia para resolver problemas con los servicios contratados.</li>
+            </ul>
+        
+            <h4>Sucursales en Ahuachapán</h4>
+        
+            <h5>Sucursal Principal</h5>
+            <p><strong>Dirección:</strong> 2ª Avenida Sur y 3ª Calle Poniente, Frente a Parque Concordia, Ahuachapán.</p>
+            <div id="map-claro-principal" class="mapa" style="height: 300px; width: 100%;"></div>
+        
+            <h5>Sucursal Atiquizaya</h5>
+            <p><strong>Dirección:</strong> Avenida 5 de Noviembre Sur 4-248, Barrio El Calvario, Frente Complejo Deportivo, Atiquizaya.</p>
+            <div id="map-claro-atiquizaya" class="mapa" style="height: 300px; width: 100%;"></div>
+        
+            <h5>Sucursal Cara Sucia</h5>
+            <p><strong>Dirección:</strong> Calle José Luis Carranza Oriente No. 1 y Carretera Internacional, Cara Sucia.</p>
+            <div id="map-claro-cara-sucia" class="mapa" style="height: 300px; width: 100%;"></div>
+        </div>
+
+                <!-- Tigo en Ahuachapán -->
+        <div id="Tigo" class="empresa">
+            <h3>Tigo</h3>
+            <img src="img/Tigo.jpg" alt="Tigo en Ahuachapán" class="imagen-empresa">
+            <p>Tigo es una compañía de telecomunicaciones que opera en varios países de Hispanoamérica, incluyendo El Salvador. Es propiedad de la multinacional luxemburguesa Millicom International Cellular S.A. (MIC) y ofrece una amplia gama de servicios de telecomunicaciones.</p>
+
+            <h4>Horarios de Atención</h4>
+            <ul>
+                <li><strong>Lunes a Viernes:</strong> 8:00 AM - 4:00 PM</li>
+                <li><strong>Sábados:</strong> 8:00 AM - 3:00 PM</li>
+                <li><strong>Domingos:</strong> Cerrado</li>
+            </ul>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Telefonía Móvil:</strong> Planes pospago y prepago para celulares.</li>
+                <li><strong>Internet Móvil:</strong> Conexiones de alta velocidad con Red LTE 4G.</li>
+                <li><strong>Televisión por Cable:</strong> Amplia selección de canales nacionales e internacionales.</li>
+                <li><strong>Soporte Técnico:</strong> Asistencia para resolver problemas con los servicios contratados.</li>
+            </ul>
+
+            <h4>Sucursales en Ahuachapán</h4>
+
+            <h5>Sucursal Principal</h5>
+            <p><strong>Dirección:</strong> 4a Calle Oriente y 3a Avenida Norte #2-12, Barrio Las Flores, Ahuachapán.</p>
+            <div id="map-tigo-principal" class="mapa" style="height: 300px; width: 100%;"></div>
+
+            <h5>Sucursal El Refugio</h5>
+            <p><strong>Dirección:</strong> Primera entrada después de Colonia Santa Elena, El Refugio, Ahuachapán.</p>
+            <div id="map-tigo-refugio" class="mapa" style="height: 300px; width: 100%;"></div>
+        </div>
+
+                <!-- Ferretería Freund en Sonsonate -->
+        <div id="Freund" class="empresa">
+            <h3>Ferretería Freund</h3>
+            <img src="img/Freund.jpeg" alt="Ferretería Freund en Sonsonate" class="imagen-empresa">
+            <p>Ferretería Freund es una empresa salvadoreña que inició operaciones en 1913. Se dedica al comercio detallista y mayorista de productos de ferretería, herramientas, pinturas, decoración, hogar, jardinería, materiales de construcción, eléctrico, iluminación, fontanería y herrajes.</p>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li>Preparación de color y asesoría en pintura.</li>
+                <li>Servicio de corte a la medida.</li>
+                <li>Copias de llaves.</li>
+                <li>Medición e instalación de cortinas.</li>
+                <li>Instalación de aires acondicionados.</li>
+                <li>Instalación de closets.</li>
+                <li>Asesoría en eléctrico e iluminación.</li>
+                <li>Instalación de escobillas a vehículos.</li>
+                <li>Repuestos y servicio de mantenimiento de equipos.</li>
+                <li>Servicio a domicilio.</li>
+            </ul>
+
+            <h4>Horarios de Atención</h4>
+            <ul>
+                <li><strong>Lunes a Viernes:</strong> 8:00 AM - 5:00 PM</li>
+                <li><strong>Sábado:</strong> 8:00 AM - 1:00 PM</li>
+                <li><strong>Domingo:</strong> Cerrado</li>
+            </ul>
+
+            <h4>Sucursal en Sonsonate</h4>
+            <p><strong>Dirección:</strong> Barrio El Ángel, Boulevard Óscar Osorio y 10a. Avenida Sur, contiguo al cuerpo de bomberos, Sonsonate.</p>
+            <div id="map-freund-sonsonate" class="mapa" style="height: 300px; width: 100%;"></div>
+        </div>
+
+        <!-- Ferretería Vidrí en Sonsonate -->
+        <div id="Vidri" class="empresa">
+            <h3>Ferretería Vidrí</h3>
+            <img src="img/Vidri.jpg" alt="Ferretería Vidrí en Sonsonate" class="imagen-empresa">
+            <p>Vidrí es una empresa conocida en El Salvador por ofrecer una amplia gama de productos para la construcción, ferretería, hogar y más.</p>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li>Venta de materiales de construcción.</li>
+                <li>Productos de ferretería.</li>
+                <li>Artículos para el hogar y jardinería.</li>
+                <li>Herramientas y equipos industriales.</li>
+            </ul>
+
+            <h4>Horario de Atención</h4>
+            <ul>
+                <li><strong>Lunes a Sábado:</strong> 8:00 AM - 6:30 PM</li>
+            </ul>
+
+            <h4>Ubicación en Sonsonate</h4>
+            <p><strong>Dirección:</strong> Km. 66, Frente al Bypass, Carretera a Acajutla, Sonsonate, El Salvador.</p>
+            <div id="map-vidri-sonsonate" class="mapa" style="height: 300px; width: 100%;"></div>
+        </div>
+
+        <!-- Súper Selectos en Sonsonate -->
+        <div id="Super selectos" class="empresa">
+            <h3>Súper Selectos</h3>
+            <img src="img/Super Selectos.jpg" alt="Súper Selectos en Sonsonate" class="imagen-empresa">
+            <p>Súper Selectos es una cadena de supermercados líder en El Salvador, perteneciente al Grupo Calleja. Ofrecen una amplia gama de productos y servicios para satisfacer las necesidades de sus clientes.</p>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li>Productos de supermercado: alimentos frescos, productos enlatados, bebidas, productos de limpieza, entre otros.</li>
+                <li>Servicio a domicilio: puedes hacer tus compras en línea y recibirlas en tu hogar.</li>
+                <li>Promociones y descuentos: ofertas especiales y descuentos en diversos productos.</li>
+                <li>Programas de fidelidad: beneficios adicionales para clientes frecuentes.</li>
+            </ul>
+
+            <h4>Horario de Atención</h4>
+            <ul>
+                <li><strong>Lunes a Jueves:</strong> 8:00 AM - 10:00 PM</li>
+                <li><strong>Viernes:</strong> 7:00 AM - 10:00 PM</li>
+                <li><strong>Domingo:</strong> 7:00 AM - 9:00 PM</li>
+            </ul>
+
+            <h4>Ubicaciones en Sonsonate</h4>
+
+            <div class="sucursal">
+                <h5>Súper Selectos El Encuentro</h5>
+                <p><strong>Dirección:</strong> Centro Comercial El Encuentro, Sonsonate, El Salvador.</p>
+                <p><strong>Teléfono:</strong> 2267-6767</p>
+                <div id="map-super-selectos-encuentro" class="mapa" style="height: 300px; width: 100%;"></div>
+            </div>
+
+
+            <div class="sucursal">
+                <h5>Súper Selectos Sonsonate</h5>
+                <p><strong>Dirección:</strong> Km. 66, Frente al Bypass, Carretera a Acajutla, Sonsonate, El Salvador.</p>
+                <div id="map-super-selectos-sonsonate" class="mapa" style="height: 300px; width: 100%;"></div>
+            </div>
+        </div>
+
+        <!-- Corporación Denisse en Sonsonate -->
+        <div id="corporacion-denisse" class="empresa">
+            <h3>Corporación Denisse, S.A. de C.V.</h3>
+            <img src="img/belleza.jpeg" alt="Corporación Denisse en Sonsonate" class="imagen-empresa">
+            <p>Corporación Denisse ofrece una variedad de servicios relacionados con la distribución de productos de belleza y perfumería.</p>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li>Venta de productos de belleza y cuidado personal: Incluye cosméticos, perfumes, y productos de cuidado personal de la marca Zermat Internacional.</li>
+                <li>Joyería brasileña: Ofrecen una selección de joyería importada de Brasil.</li>
+                <li>Asesoría independiente: Brindan la oportunidad de que las personas se conviertan en asesoras independientes, permitiéndoles iniciar su propio negocio vendiendo los productos de la empresa.</li>
+            </ul>
+
+            <h4>Horario de Atención</h4>
+            <ul>
+                <li><strong>Lunes a Viernes:</strong> 8:00 AM - 5:00 PM</li>
+                <li><strong>Sábado:</strong> 8:00 AM - 12:00 PM</li>
+            </ul>
+
+            <h4>Ubicaciones en Sonsonate</h4>
+
+            <div class="sucursal">
+                <h5>Corporación Denisse Sucursal Principal en Sonsonate Centro</h5>
+                <p><strong>Dirección:</strong> Calle Principal, Sonsonate Centro.</p>
+                <p><strong>Indicaciones:</strong> Cerca del parque central, a unos metros de la iglesia principal.</p>
+                <div id="map-corporacion-denisse-sonsonate" class="mapa" style="height: 300px; width: 100%;"></div>
+            </div>
+
+
+            <div class="sucursal">
+                <h5>Corporación Denisse Sucursal en Izalco</h5>
+                <p><strong>Dirección:</strong> Avenida Central, Izalco.</p>
+                <p><strong>Indicaciones:</strong> Frente al mercado municipal, al lado de la farmacia Izalco.</p>
+                <div id="map-corporacion-denisse-izalco" class="mapa" style="height: 300px; width: 100%;"></div>
+            </div>
+
+            <div class="sucursal">
+                <h5>Corporación Denisse Sucursal en Acajutla</h5>
+                <p><strong>Dirección:</strong> Carretera a la Playa, Acajutla.</p>
+                <p><strong>Indicaciones:</strong> A 500 metros del puerto, junto a la gasolinera Texaco.</p>
+                <div id="map-corporacion-denisse-acajutla" class="mapa" style="height: 300px; width: 100%;"></div>
+            </div>
+        </div>
+
+                <!-- Autokia en Sonsonate -->
+        <div id="autokia" class="empresa">
+            <h3>Autokia, S.A. de C.V.</h3>
+            <img src="img/mantenimiento.jpg" alt="Autokia en Sonsonate" class="imagen-empresa">
+            <p>Autokia es una empresa dedicada a la venta y mantenimiento de vehículos.</p>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li>Venta de vehículos nuevos y usados: Ofrecen una amplia gama de automóviles de diferentes marcas y modelos.</li>
+                <li>Mantenimiento y reparaciones: Servicios de mecánica general, cambio de aceite, alineación y balanceo, entre otros.</li>
+                <li>Financiamiento: Opciones de financiamiento para la compra de vehículos.</li>
+                <li>Seguros: Asesoría y venta de seguros para vehículos.</li>
+            </ul>
+
+            <h4>Horario de Atención</h4>
+            <ul>
+                <li><strong>Lunes a Viernes:</strong> 8:00 AM - 5:00 PM</li>
+                <li><strong>Sábado:</strong> 8:00 AM - 12:00 PM</li>
+                <li><strong>Domingo:</strong> Cerrado</li>
+            </ul>
+
+            <h4>Ubicaciones en Sonsonate</h4>
+
+            <!-- Sucursal Sonsonate Centro -->
+            <div class="sucursal">
+                <h5>Autokia Sucursal Principal en Sonsonate Centro</h5>
+                <p><strong>Dirección:</strong> Avenida Oidor, Sonsonate.</p>
+                <p><strong>Indicaciones:</strong> Cerca del parque central, a unos metros de la iglesia principal.</p>
+                <div id="map-autokia-sonsonate" class="mapa" style="height: 300px; width: 100%;"></div>
+            </div>
+
+            <!-- Sucursal Izalco -->
+            <div class="sucursal">
+                <h5>Autokia Sucursal en Izalco</h5>
+                <p><strong>Dirección:</strong> Avenida Central, Izalco.</p>
+                <p><strong>Indicaciones:</strong> Frente al mercado municipal, al lado de la farmacia Izalco.</p>
+                <div id="map-autokia-izalco" class="mapa" style="height: 300px; width: 100%;"></div>
+            </div>
+
+            <!-- Sucursal Acajutla -->
+            <div class="sucursal">
+                <h5>Autokia Sucursal en Acajutla</h5>
+                <p><strong>Dirección:</strong> Carretera a la Playa, Acajutla.</p>
+                <p><strong>Indicaciones:</strong> A 500 metros del puerto, junto a la gasolinera Texaco.</p>
+                <div id="map-autokia-acajutla" class="mapa" style="height: 300px; width: 100%;"></div>
+            </div>
+        </div>
+
+        <div id="Super SElectos" class="empresa" style="display: none;">
+            <h3>Súper Selectos</h3>
+            <img src="img/Super Selectos.jpg" alt="Súper Selectos en San Miguel" class="imagen-empresa">
+            <p>Súper Selectos es la cadena de supermercados líder en El Salvador, con más de 110 sucursales en todo el país. Fundada en 1950 por Daniel Calleja, la empresa ha crecido significativamente y ahora forma parte del Grupo Calleja.</p>
+            
+            <h4>Historia</h4>
+            <ul>
+                <li><strong>1950:</strong> Daniel Calleja fundó la primera tienda llamada “Sumesa” en San Salvador.</li>
+                <li><strong>1969:</strong> Se inaugura la primera tienda bajo el nombre “Súper Selectos”.</li>
+                <li><strong>Década de 1990:</strong> Expansión significativa con la adquisición de otras cadenas de supermercados como El Sol, Todo por Menos, Multimart y La Despensa de Don Juan.</li>
+            </ul>
+            
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li>Venta de productos de abarrotes: Incluye alimentos frescos, enlatados, y productos de limpieza.</li>
+                <li>Pago de servicios: Puedes pagar tus facturas de servicios públicos.</li>
+                <li>Cobro de remesas: Servicio para recibir remesas del extranjero.</li>
+                <li>Recarga de saldo para celular: Recarga de saldo y datos para teléfonos móviles.</li>
+                <li>Promociones especiales: Ofertas y descuentos en diversos productos durante todo el año.</li>
+            </ul>
+            
+            <h4>Horario de Atención</h4>
+            <ul>
+                <li><strong>Lunes a Domingo:</strong> 7:00 AM - 9:00 PM</li>
+            </ul>
+            
+            <h4>Ubicaciones en San Miguel</h4>
+            
+            <!-- Sucursal San Miguel Centro -->
+            <div class="sucursal">
+                <h5>Súper Selectos San Miguel Centro</h5>
+                <p><strong>Dirección:</strong> Avenida Roosevelt, San Miguel.</p>
+                <p><strong>Indicaciones:</strong> Cerca del parque central, a unos metros de la catedral.</p>
+                <div id="map-super-selectos-centro" class="mapa" style="height: 300px; width: 100%;"></div>
+            </div>
+            
+            <!-- Sucursal San Miguel Terminal -->
+            <div class="sucursal">
+                <h5>Súper Selectos San Miguel Terminal</h5>
+                <p><strong>Dirección:</strong> Boulevard Los Héroes, San Miguel.</p>
+                <p><strong>Indicaciones:</strong> Frente a la terminal de autobuses.</p>
+                <div id="map-super-selectos-terminal" class="mapa"></div>
+            </div>
+            
+            <!-- Sucursal Plaza Viva -->
+            <div class="sucursal">
+                <h5>Súper Selectos Plaza Viva</h5>
+                <p><strong>Dirección:</strong> Carretera Panamericana, San Miguel.</p>
+                <p><strong>Indicaciones:</strong> Dentro del centro comercial Plaza Viva.</p>
+                <div id="map-super-selectos-viva" class="mapa" ></div>
+            </div>
+            
+            <!-- Sucursal El Encuentro El Sitio -->
+            <div class="sucursal">
+                <h5>Súper Selectos El Encuentro El Sitio</h5>
+                <p><strong>Dirección:</strong> Centro Comercial El Encuentro, San Miguel.</p>
+                <p><strong>Indicaciones:</strong> En el cantón El Sitio, cerca de la carretera que conduce a La Unión.</p>
+                <div id="map-super-selectos-sitio" class="mapa" ></div>
+            </div>
+        </div>
+
+        <!-- Walmart en San Miguel -->
+        <div id="walmart" class="empresa">
+            <h3>Walmart</h3>
+            <img src="img/Walmart.webp" alt="Walmart en San Miguel" class="imagen-empresa">
+            <p>Walmart es una cadena de supermercados internacional que ofrece una amplia variedad de productos y servicios en San Miguel.</p>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li>Venta de productos de abarrotes: Incluye alimentos frescos, enlatados, y productos de limpieza.</li>
+                <li>Electrodomésticos y electrónicos: Ofrecen una variedad de electrodomésticos, computadoras, y otros dispositivos electrónicos.</li>
+                <li>Ropa y accesorios: Venta de ropa para toda la familia, así como accesorios y calzado.</li>
+                <li>Artículos para el hogar: Productos de decoración, muebles, y utensilios de cocina.</li>
+                <li>Farmacia: Servicios de farmacia y venta de medicamentos.</li>
+                <li>Servicio a domicilio: Puedes hacer tus compras en línea y recibirlas en tu hogar.</li>
+                <li>Pick up: Servicio de recogida en tienda para compras realizadas en línea.</li>
+            </ul>
+
+            <h4>Horario de Atención</h4>
+            <ul>
+                <li><strong>Domingo a Jueves:</strong> 7:00 AM - 9:00 PM</li>
+                <li><strong>Viernes y Sábados:</strong> 7:00 AM - 11:00 PM</li>
+            </ul>
+
+            <h4>Ubicación en San Miguel</h4>
+            <p><strong>Dirección:</strong> Boulevard Kury, Cantón El Jute, San Miguel, frente al Club Deportivo Águila.</p>
+            <p><strong>Teléfono:</strong> +503 2523 6800</p>
+            <div id="map-walmart" class="mapa" style="height: 300px; width: 100%;"></div>
+        </div>
+
+        <!-- Productos Alimenticios Diana S.A. de C.V. en San Miguel -->
+        <div id="Productos Alimenticios Diana S.A. de C.V." class="empresa">
+            <h3>Productos Alimenticios Diana S.A. de C.V.</h3>
+            <img src="img/galleta.webp" alt="Productos Alimenticios Diana en San Miguel" class="imagen-empresa">
+            <p>Productos Alimenticios Diana S.A. de C.V. es una empresa salvadoreña fundada en 1951, reconocida por sus populares boquitas y productos de confitería distribuidos en toda Centroamérica y Estados Unidos.</p>
+
+            <h4>Información de la Empresa</h4>
+            <ul>
+                <li><strong>Fundación:</strong> 1951 por Max Olano y Pablo Tesak.</li>
+                <li><strong>Productos:</strong> Boquitas, confitería, galletas, y otros productos alimenticios.</li>
+                <li><strong>Presencia:</strong> Distribución en toda Centroamérica y Estados Unidos.</li>
+            </ul>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li>Producción y distribución de alimentos: Incluye una amplia gama de boquitas, confitería y galletas.</li>
+                <li>Centros de distribución: Cuenta con 18 centros en la región, incluyendo 4 distribuidores externos.</li>
+                <li>Exportación: Exportan el 70% de su producción a países de la región y Estados Unidos.</li>
+            </ul>
+
+            <h4>Horario de Atención</h4>
+            <ul>
+                <li><strong>Lunes a viernes:</strong> 8:00 AM - 5:00 PM</li>
+                <li><strong>Sábados:</strong> 8:00 AM - 12:00 PM</li>
+                <li><strong>Domingos:</strong> Cerrado</li>
+            </ul>
+
+            <h4>Sucursales en San Miguel</h4>
+
+            <h5>Sucursal Principal en San Miguel</h5>
+            <p><strong>Dirección:</strong> Avenida Roosevelt, San Miguel.</p>
+            <p><strong>Indicaciones:</strong> Cerca del parque central, a unos metros de la catedral.</p>
+            <div id="map-diana-principal" class="mapa" style="height: 300px; width: 100%;"></div>
+
+            <h5>Sucursal en El Encuentro</h5>
+            <p><strong>Dirección:</strong> Centro Comercial El Encuentro, San Miguel.</p>
+            <p><strong>Indicaciones:</strong> En el cantón El Sitio, cerca de la carretera que conduce a La Unión.</p>
+            <div id="map-diana-encuentro" class="mapa" style="height: 300px; width: 100%;"></div>
+        </div>
+
+        <!-- Zagrofer en San Miguel -->
+        <div id="zagrofer" class="empresa">
+            <h3>Zagrofer</h3>
+            <img src="img/cultura.jpeg" alt="Zagrofer en San Miguel" class="imagen-empresa">
+            <p>Zagrofer es una empresa salvadoreña con más de 10 años de experiencia en el sector agro-industrial. Se especializa en la inducción, desarrollo y comercialización de productos que mejoran el desempeño y desarrollo agrícola tanto a nivel nacional como internacional.</p>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li>Agroquímicos: Amplia variedad de herbicidas e insecticidas para una cosecha libre de plagas.</li>
+                <li>Fertilizantes: Diversos abonos y fórmulas para el crecimiento de cultivos.</li>
+                <li>Mallas y Alambres: Proveen protección adecuada y uniformidad en los frutos.</li>
+                <li>Semillas, Sacos y Silos: Semillas de granos básicos, frutas y hortalizas; silos y sacos de almacenamiento.</li>
+                <li>Asesoría Técnica: Capacitación y asesoría para mejorar producción y calidad de cultivos.</li>
+            </ul>
+
+            <h4>Horario de Atención</h4>
+            <ul>
+                <li><strong>Lunes a Sábado:</strong> 7:00 AM - 5:00 PM</li>
+                <li><strong>Domingos:</strong> Cerrado</li>
+            </ul>
+
+            <h4>Ubicación en San Miguel</h4>
+            <p><strong>Dirección:</strong> 11A Calle Oriente y 2A Avenida Sur, San Miguel, San Miguel Department.</p>
+            <p><strong>Teléfono:</strong> +503 7607 4601</p>
+            <div id="map-zagrofer" class="mapa" style="height: 300px; width: 100%;"></div>
+        </div>
+        <!-- Grupo La Merced en San Miguel -->
+        <div id="grupo-la-merced" class="empresa">
+            <h3>Grupo La Merced, S.A. de C.V.</h3>
+            <img src="img/camaras.png" alt="Grupo La Merced en San Miguel" class="imagen-empresa">
+            <p>Grupo La Merced, S.A. de C.V. es una empresa salvadoreña especializada en la instalación de redes, cámaras de seguridad, impresión de carnets y más. Fundada en abril de 2016, se ha destacado por ofrecer soluciones tecnológicas y de seguridad a sus clientes.</p>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li>Instalación de redes: Configuración y mantenimiento de redes informáticas.</li>
+                <li>Cámaras de seguridad: Venta e instalación de sistemas de videovigilancia.</li>
+                <li>Impresión de carnets: Servicios de diseño e impresión de carnets de identificación.</li>
+                <li>Sistemas solares: Equipos y soluciones para energía solar.</li>
+                <li>Electricidad e informática: Venta de equipos eléctricos y de informática.</li>
+            </ul>
+
+            <h4>Horario de Atención</h4>
+            <ul>
+                <li><strong>Lunes a Viernes:</strong> 8:00 AM - 5:00 PM</li>
+                <li><strong>Sábados:</strong> 8:00 AM - 12:00 PM</li>
+                <li><strong>Domingos:</strong> Cerrado</li>
+            </ul>
+
+            <h4>Ubicación en San Miguel</h4>
+            <p><strong>Dirección:</strong> Avenida Roosevelt Sur #702, San Miguel.</p>
+            <p><strong>Teléfono:</strong> +503 7833 6155</p>
+            <div id="map-grupo-la-merced" class="mapa" style="height: 300px; width: 100%;"></div>
+        </div>
+        <!-- Zamorano Group en San Miguel -->
+        <div id="Zamorano Group, S.A. de C.V." class="empresa">
+            <h3>Zamorano Group, S.A. de C.V.</h3>
+            <img src="img/area-ferreteria-y-construccion.jpg" alt="Zamorano Group en San Miguel" class="imagen-empresa">
+            <p>Zamorano Group, S.A. de C.V. es una empresa salvadoreña con más de 20 años de experiencia en diversos sectores como la agricultura, alimentos, ferretería, materia prima, plásticos y veterinaria.</p>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li>Agroservicio: Soluciones para el control de plagas y cuidado de cultivos.</li>
+                <li>Ferretería y Construcción: Amplia gama de productos para construcción, jardinería, fontanería y electricidad.</li>
+                <li>Veterinaria: Productos para el cuidado y salud de animales.</li>
+                <li>Alimentos: Nutrición para ganado y mascotas.</li>
+                <li>Plásticos: Artículos de plástico para el hogar y otros usos.</li>
+            </ul>
+
+            <h4>Horario de Atención</h4>
+            <ul>
+                <li><strong>Lunes a Sábado:</strong> 6:45 AM - 5:00 PM</li>
+                <li><strong>Domingos:</strong> 6:45 AM - 12:00 PM</li>
+            </ul>
+
+            <h4>Ubicación en San Miguel</h4>
+            <p><strong>Dirección:</strong> 5ta Calle Poniente #109, Barrio La Merced, San Miguel.</p>
+            <p><strong>Teléfono:</strong> +503 2660 5015</p>
+            <div id="map-zamorano-group" class="mapa" style="height: 300px; width: 100%;"></div>
+        </div>
+
+        <!-- Empresa Eléctrica de Oriente (EEO) en San Miguel -->
+        <div id="empresa-electrica-oriente" class="empresa">
+            <h3>Empresa Eléctrica de Oriente (EEO)</h3>
+            <img src="img/electrica.jpeg" alt="Empresa Eléctrica de Oriente en San Miguel" class="imagen-empresa">
+            <p><strong>Fundación:</strong> 1995</p>
+            <p><strong>Cobertura:</strong> Distribuye energía en los departamentos de San Miguel, Morazán, La Unión, San Vicente y parte de Usulután.</p>
+            <p><strong>Clientes:</strong> Beneficia a más de 352,000 clientes en un área de 6,530 km².</p>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li>Distribución de energía eléctrica: Proveen electricidad a hogares, empresas y grandes clientes.</li>
+                <li>Atención al cliente: Asesoría técnica y comercial para mejorar la operatividad del suministro eléctrico.</li>
+                <li>Pagos y consultas en línea: Opciones para realizar consultas y pagos de facturas en línea.</li>
+            </ul>
+
+            <h4>Horario de Atención</h4>
+            <ul>
+                <li><strong>Lunes a viernes:</strong> 7:30 AM - 4:30 PM</li>
+                <li><strong>Sábados:</strong> 8:00 AM - 12:00 PM</li>
+            </ul>
+
+            <h4>Ubicación en San Miguel</h4>
+            <p><strong>Dirección:</strong> 4.ª Calle Oriente #405, San Miguel.</p>
+            <p><strong>Indicaciones:</strong> Cerca del parque central, a unos metros de la catedral.</p>
+            <div id="map-eel" class="mapa" style="height: 300px; width: 100%;"></div>
+        </div>
+
+        <!-- Café Perquín en Morazán -->
+        <div id="cafe-perquin" class="empresa">
+            <h3>Café Perquín</h3>
+            <img src="img/cafe perquin.jpeg" alt="Café Perquín en Morazán" class="imagen-empresa">
+            <p><strong>Ubicación:</strong> Perquín, Morazán, El Salvador.</p>
+            <p><strong>Productos:</strong> Café cultivado con técnicas de agricultura orgánica y procesado de manera artesanal.</p>
+            <p><strong>Especialidad:</strong> Ofrecen un café aromático y de alta calidad, cultivado en su propia finca.</p>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Producción de café:</strong> Cultivan y procesan café utilizando métodos orgánicos y sostenibles.</li>
+                <li><strong>Turismo:</strong> Ofrecen visitas a su finca para conocer el proceso de cultivo y producción del café.</li>
+                <li><strong>Restaurante:</strong> En el restaurante de la finca, puedes disfrutar de productos frescos y naturales, como horchata, chocolate, mermeladas, pan, galletas y pastelería, todos preparados en casa sin aditivos artificiales.</li>
+            </ul>
+
+            <h4>Horarios</h4>
+            <ul>
+                <li><strong>Restaurante:</strong> Abierto todos los días de 6:00 AM a 8:00 PM.</li>
+            </ul>
+
+            <h4>Ubicación</h4>
+            <p><strong>Dirección:</strong> Perquín, Morazán, El Salvador.</p>
+            <p><strong>Indicaciones:</strong> La finca y el restaurante están ubicados en la Ruta de la Paz, una zona conocida por su belleza natural y su historia.</p>
+            <div id="map-cafe-perquin" class="mapa" style="height: 300px; width: 100%;"></div>
+        </div>
+
+        <!-- Cooperativa de Caficultores de Morazán -->
+        <div id="Cooperativa Caficultores" class="empresa">
+            <h3>Cooperativa de Caficultores de Morazán</h3>
+            <img src="img/exportaccion.jpeg" alt="Cooperativa de Caficultores " class="imagen-empresa">
+            <p><strong>Fundación:</strong> La cooperativa fue fundada en la década de 1980.</p>
+            <p><strong>Ubicación:</strong> Principalmente en la región de Osicala, Morazán.</p>
+            <p><strong>Productos:</strong> Café de variedades como Bourbon y Pacamara, conocido por su sabor dulce y floral.</p>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Producción de café:</strong> Cultivan y procesan café utilizando métodos sostenibles y orgánicos.</li>
+                <li><strong>Exportación:</strong> Exportan café a mercados internacionales como Inglaterra, Japón y Estados Unidos.</li>
+                <li><strong>Capacitación y asesoría:</strong> Ofrecen formación en buenas prácticas agrícolas para mejorar la calidad del café.</li>
+            </ul>
+
+            <h4>Horarios</h4>
+            <ul>
+                <li><strong>Lunes a viernes:</strong> 8:00 AM - 5:00 PM.</li>
+                <li><strong>Sábados:</strong> 8:00 AM - 12:00 PM.</li>
+                <li><strong>Domingos:</strong> Cerrado.</li>
+            </ul>
+
+            <h4>Ubicación</h4>
+            <p><strong>Oficina Principal en Osicala:</strong></p>
+            <p><strong>Dirección:</strong> Osicala, Morazán.</p>
+            <p><strong>Indicaciones:</strong> Cerca del centro del municipio, en la zona cafetalera.</p>
+            <div id="map-cooperativa-caficultores" class="mapa" style="height: 300px; width: 100%;"></div>
+        </div>
+
+        <!-- Cooperativa de Caficultores de Morazán -->
+        <div id="cooperativa-caficultores" class="empresa">
+            <h3>Cooperativa de Caficultores de Morazán</h3>
+            <img src="img/usa.jpeg" alt="Cooperativa de Caficultores de Morazán" class="imagen-empresa">
+            <p><strong>Fundación:</strong> Establecida en la década de 1980.</p>
+            <p><strong>Ubicación:</strong> Principalmente en la región de Osicala, Morazán.</p>
+            <p><strong>Productos:</strong> Especializada en variedades de café como Bourbon y Pacamara, reconocidas por su sabor dulce y floral.</p>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Producción de café:</strong> Utilizan métodos sostenibles y orgánicos para cultivar y procesar el café.</li>
+                <li><strong>Exportación:</strong> Exportan su café a mercados internacionales, incluyendo Inglaterra, Japón y Estados Unidos.</li>
+                <li><strong>Capacitación y asesoría:</strong> Ofrecen formación en buenas prácticas agrícolas para mejorar la calidad del café.</li>
+            </ul>
+
+            <h4>Horarios</h4>
+            <ul>
+                <li><strong>Lunes a viernes:</strong> 8:00 AM - 5:00 PM.</li>
+                <li><strong>Sábados:</strong> 8:00 AM - 12:00 PM.</li>
+                <li><strong>Domingos:</strong> Cerrado.</li>
+            </ul>
+
+            <h4>Ubicación</h4>
+            <p><strong>Oficina Principal en Osicala:</strong></p>
+            <p><strong>Dirección:</strong> Osicala, Morazán.</p>
+            <p><strong>Indicaciones:</strong> Cerca del centro del municipio, en la zona cafetalera.</p>
+            <div id="map-cooperativa-caficultores" class="mapa" style="height: 300px; width: 100%;"></div>
+        </div>
+
+        <!-- FEDECACES -->
+        <div id="fedecaces" class="empresa">
+            <h3>FEDECACES (Federación de Asociaciones Cooperativas de Ahorro y Crédito de El Salvador)</h3>
+            <img src="img/Fedecases.jpeg" alt="FEDECACES" class="imagen-empresa">
+            
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Cuentas de ahorro:</strong> Ofrecen diferentes tipos de cuentas de ahorro para sus asociados.</li>
+                <li><strong>Líneas de crédito:</strong> Préstamos personales, hipotecarios y para negocios.</li>
+                <li><strong>Pago de servicios:</strong> Facilitan el pago de servicios públicos y privados.</li>
+                <li><strong>Remesas familiares:</strong> Envío y recepción de remesas desde el extranjero.</li>
+                <li><strong>Seguros:</strong> Productos de seguros de vida y daños a través de su aseguradora cooperativa, Seguros Futuro.</li>
+            </ul>
+
+            <h4>Horarios</h4>
+            <ul>
+                <li><strong>Lunes a viernes:</strong> 8:00 AM - 4:00 PM.</li>
+                <li><strong>Sábados:</strong> 8:00 AM - 12:00 PM.</li>
+                <li><strong>Domingos:</strong> Cerrado.</li>
+            </ul>
+
+            <h4>Ubicación</h4>
+            <p><strong>Sucursal La Unión:</strong></p>
+            <p><strong>Dirección:</strong> 2ª Calle Oriente y 4ª Avenida Norte, Barrio El Centro, La Unión.</p>
+            <p><strong>Indicaciones:</strong> Cerca del parque central de La Unión, a unos metros de la alcaldía municipal.</p>
+            <div id="map-fedecaces" class="mapa" style="height: 300px; width: 100%;"></div>
+        </div>
+
+        <!-- Puerto La Unión Centroamericana -->
+        <div id="puerto-la-union" class="empresa">
+            <h3>Puerto La Unión Centroamericana (Puerto de Cutuco)</h3>
+            <img src="img/puerto.jpeg" alt="Puerto La Unión Centroamericana" class="imagen-empresa">
+            
+            <h4>Información General</h4>
+            <p><strong>Ubicación:</strong> Ciudad de La Unión, Departamento de La Unión, El Salvador.</p>
+            <p><strong>Operador:</strong> Comisión Ejecutiva Portuaria Autónoma (CEPA).</p>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Avituallamiento:</strong> Suministro de víveres y otros bienes necesarios para los viajes.</li>
+                <li><strong>Entrega de efectivo al capitán:</strong> Gestión de fondos para las necesidades del buque.</li>
+                <li><strong>Cambio de tripulación:</strong> Transporte de tripulantes desde y hacia el puerto.</li>
+                <li><strong>Aprovisionamientos:</strong> Abastecimiento de alimentos y otros bienes.</li>
+                <li><strong>Inspecciones de calados:</strong> Medición de los calados del buque para la gestión de cargamentos.</li>
+            </ul>
+
+            <h4>Horarios</h4>
+            <p>Los horarios de operación pueden variar, pero generalmente el puerto está activo las 24 horas del día para facilitar el comercio y las operaciones marítimas.</p>
+
+            <h4>Ubicación</h4>
+            <p>El Puerto La Unión Centroamericana se encuentra en la ciudad de La Unión, en el departamento de La Unión, El Salvador. Está situado en la Bahía de La Unión, en el Golfo de Fonseca.</p>
+            <div id="map-puerto-la-union" class="mapa" style="height: 300px; width: 100%;"></div>
+        </div>
+
+        <!-- Distribuidora La Unión -->
+        <div id="distribuidora-la-union" class="empresa">
+            <h3>Distribuidora La Unión</h3>
+            <img src="img/masivo.jpg" alt="Distribuidora La Unión" class="imagen-empresa">
+            
+            <h4>Información General</h4>
+            <p><strong>Nombre:</strong> Distribuidora La Unión</p>
+            <p><strong>Productos:</strong> Detergentes y jabones, confitería y alimentos, productos de ferretería, productos plásticos y paneles solares.</p>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Detergentes y jabones</strong></li>
+                <li><strong>Confitería y alimentos</strong></li>
+                <li><strong>Productos de ferretería</strong></li>
+                <li><strong>Productos plásticos</strong></li>
+                <li><strong>Paneles solares</strong></li>
+            </ul>
+
+            <h4>Ubicación</h4>
+            <p><strong>Dirección:</strong> Diagonal 3, Calz. Atanasio Tzul 43-15 Zona 12, Guatemala, Guatemala.</p>
+            
+            <h4>Contacto</h4>
+            <p><strong>Teléfono:</strong> +502 2382 3200</p>
+            <p><strong>Correo electrónico:</strong> <a href="mailto:info@uniongt.com">info@uniongt.com</a></p>
+
+            <div id="map-distribuidora-la-union" class="mapa" style="height: 300px; width: 100%;"></div>
+        </div>
+
+        <!-- Ferretería La Unión -->
+        <div id="ferreteria-la-union" class="empresa">
+            <h3>Ferretería La Unión</h3>
+            <img src="img/contruccion.avif" alt="Ferretería La Unión" class="imagen-empresa">
+            
+            <h4>Información General</h4>
+            <p><strong>Nombre:</strong> Ferretería La Unión</p>
+            <p><strong>Productos:</strong> Herramientas manuales y eléctricas, suministros de construcción, pinturas, acabados, fontanería y electricidad.</p>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Venta de herramientas manuales y eléctricas</strong></li>
+                <li><strong>Suministros de construcción</strong></li>
+                <li><strong>Pinturas y acabados</strong></li>
+                <li><strong>Fontanería y electricidad</strong></li>
+            </ul>
+
+            <h4>Ubicación</h4>
+            <p><strong>Dirección:</strong> Cra. 9 #9-70, La Unión, Antioquia.</p>
+
+            <h4>Horarios</h4>
+            <p><strong>Lunes a sábado:</strong> 7:30 AM a 6:00 PM</p>
+            <p><strong>Domingo:</strong> 7:30 AM a 12:00 PM</p>
+
+            <div id="map-ferreteria-la-union" class="mapa" style="height: 300px; width: 100%;"></div>
+        </div>
+
+        <!-- Almacenes Vidrí - La Libertad -->
+        <div id="vidri-la-libertad" class="empresa">
+            <h3>Almacenes Vidrí - La Libertad</h3>
+            <img src="img/Vidri.jpg" alt="Almacenes Vidrí" class="imagen-empresa">
+            
+            <h4>Información General</h4>
+            <p><strong>Nombre:</strong> Almacenes Vidrí</p>
+            <p><strong>Fundación:</strong> 1917</p>
+            <p>Almacenes Vidrí es una ferretería que cuenta con 16 sucursales distribuidas en varias zonas de El Salvador. Sus sucursales están segmentadas en dos tipos: auto-servicio o ‘home-centers’ y tipo industrial o mostrador.</p>
+            
+            <h4>Productos</h4>
+            <p>Su catálogo abarca 22 departamentos: eléctrico, iluminación y ventilación, audio video y redes, fontanería, baños, pintura, cerrajería, ferretería, materiales de construcción, tornillería, herramientas eléctricas y manuales, electrodomésticos, hogar, outdoors, limpieza, bombas y calentadores, industrial, refrigeración, automotriz, jardinería, y maquinaria para jardín.</p>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Ferretería:</strong> Herramientas, tornillería, pinturas, y más.</li>
+                <li><strong>Materiales de construcción:</strong> Cemento, bloques, varillas, etc.</li>
+                <li><strong>Artículos para el hogar:</strong> Electrodomésticos, utensilios de cocina, muebles.</li>
+                <li><strong>Jardinería:</strong> Herramientas y productos para el cuidado del jardín.</li>
+                <li><strong>Automotriz:</strong> Accesorios y herramientas para vehículos.</li>
+            </ul>
+
+            <h4>Horarios de Atención</h4>
+            <p><strong>Lunes a Sábado:</strong> 7:30 AM - 7:00 PM</p>
+            <p><strong>Domingo:</strong> 8:00 AM - 5:00 PM</p>
+
+            <h4>Ubicación de Sucursales en La Libertad</h4>
+
+            <!-- Sucursal Vidrí Lourdes -->
+            <h5>Vidrí Lourdes</h5>
+            <p><strong>Dirección:</strong> Carretera Panamericana de San Salvador a Santa Ana, Km 25.5 y calle Principal Las Conchitas, Col. Las Moras, Colón.</p>
+            <div id="map-vidri-lourdes" class="mapa" style="height: 300px; width: 100%;"></div>
+
+            <!-- Sucursal Vidrí Merliot -->
+            <h5>Vidrí Merliot</h5>
+            <p><strong>Dirección:</strong> Bulevar Merliot, Santa Tecla.</p>
+            <div id="map-vidri-merliot" class="mapa" style="height: 300px; width: 100%; margin-top: 15px;"></div>
+
+            <!-- Sucursal Vidrí Quezaltepeque -->
+            <h5>Vidrí Quezaltepeque</h5>
+            <p><strong>Dirección:</strong> Avenida José María Castro, Quezaltepeque.</p>
+            <div id="map-vidri-quezaltepeque" class="mapa" style="height: 300px; width: 100%; margin-top: 15px;"></div>
+        </div>
+
+        <!-- ANDA - La Libertad -->
+        <div id="anda-la-libertad" class="empresa">
+            <h3>ANDA - La Libertad</h3>
+            <img src="img/anda.jpg" alt="ANDA La Libertad" class="imagen-empresa">
+            
+            <h4>Información General</h4>
+            <p>ANDA ofrece una variedad de servicios relacionados con el suministro de agua potable y el tratamiento de aguas residuales.</p>
+            
+            <h4>Servicios</h4>
+            <ul>
+                <li>Conexiones de agua potable</li>
+                <li>Mantenimiento y reparación de tuberías</li>
+                <li>Tratamiento de aguas residuales</li>
+                <li>Facturación y cobro de servicios</li>
+                <li>Atención al cliente para consultas y reportes de problemas</li>
+            </ul>
+
+            <h4>Horarios de Atención</h4>
+            <p><strong>Lunes a Viernes:</strong> 8:00 a.m. - 4:00 p.m. (sin cerrar al mediodía)</p>
+            <p><strong>Sábados:</strong> 8:00 a.m. - 12:00 m.d.</p>
+
+            <h4>Ubicaciones de Sucursales en La Libertad</h4>
+
+            <!-- Sucursal Santa Tecla -->
+            <h5>Santa Tecla</h5>
+            <p><strong>Dirección:</strong> Calle Daniel Hernández, local 3-2, Plaza Concepción, Santa Tecla.</p>
+            <p><strong>Teléfonos:</strong> 2514-3291 y 2514-3288</p>
+            <div id="map-anda-santa-tecla" class="mapa" style="height: 300px; width: 100%;"></div>
+
+            <!-- Sucursal Antiguo Cuscatlán -->
+            <h5>Antiguo Cuscatlán</h5>
+            <p><strong>Dirección:</strong> Centro Comercial Las Cascadas, local 201, Carretera Panamericana, Antiguo Cuscatlán.</p>
+            <p><strong>Teléfono:</strong> 2534-9672</p>
+            <div id="map-anda-antiguo-cuscatlan" class="mapa" style="height: 300px; width: 100%; margin-top: 15px;"></div>
+        </div>
+
+        <!-- Hencorp Gestora de Fondos de Inversión, S.A. - La Libertad -->
+        <div id="hencorp-la-libertad" class="empresa">
+            <h3>Hencorp Gestora de Fondos de Inversión, S.A.</h3>
+            <img src="img/asesora.jpeg" alt="Hencorp Gestora de Fondos de Inversión" class="imagen-empresa">
+            
+            <h4>Sobre Hencorp Gestora de Fondos de Inversión, S.A.</h4>
+            <p>Hencorp Gestora de Fondos de Inversión, S.A. es una empresa dedicada a la gestión de fondos de inversión. Su misión es apoyar el éxito financiero de sus clientes y generar valor para sus accionistas. La empresa se destaca por su transparencia, responsabilidad y desarrollo profesional.</p>
+            
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Fondos de Inversión Abiertos:</strong> Inversión en títulos valores en el mercado de valores de El Salvador, tanto del sector público como privado.</li>
+                <li><strong>Atención al Partícipe:</strong> Información sobre productos, procedimientos para contacto, marco legal, y gestión de quejas y reclamos.</li>
+                <li><strong>Asesoría Financiera:</strong> Servicios de asesoría para optimizar las inversiones de sus clientes.</li>
+            </ul>
+
+            <h4>Horarios de Atención</h4>
+            <p><strong>Lunes a Viernes:</strong> 9:00 a.m. - 6:00 p.m.</p>
+            <p><strong>Sábados:</strong> 9:00 a.m. - 12:00 m.d.</p>
+
+            <h4>Ubicación en La Libertad</h4>
+            <p><strong>Santa Elena, Antiguo Cuscatlán</strong></p>
+            <p><strong>Dirección:</strong> Edificio D’CORA, 2do. piso, Boulevard Orden de Malta y Calle el Boquerón, Urbanización Santa Elena, Antiguo Cuscatlán, La Libertad.</p>
+            <p><strong>Teléfonos:</strong> +503 2212-8700 y +503 2289-2577</p>
+            <div id="map-hencorp-santa-elena" class="mapa" style="height: 300px; width: 100%; margin-top: 15px;"></div>
+        </div>
+
+        <!-- Nobs Hidrofusion S.A. de C.V. - La Libertad -->
+        <div id="nobs-hidrofusion-la-libertad" class="empresa">
+            <h3>Nobs Hidrofusion S.A. de C.V.</h3>
+            <img src="img/naturales.jpg" alt="Nobs Hidrofusion S.A. de C.V." class="imagen-empresa">
+            
+            <h4>Sobre Nobs Hidrofusion S.A. de C.V.</h4>
+            <p>Nobs Hidrofusion S.A. de C.V. es una empresa con sede en El Salvador dedicada a la producción de ingredientes naturales para fragancias y sabores. La empresa se enfoca en mantener altos estándares de control de calidad y en la innovación a través de su departamento de investigación y desarrollo.</p>
+            
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Producción de Ingredientes Naturales:</strong> Especializados en fragancias y sabores naturales.</li>
+                <li><strong>Investigación y Desarrollo:</strong> Innovación constante en la creación de nuevos productos.</li>
+                <li><strong>Control de Calidad:</strong> Estrictos procesos para asegurar la calidad de sus productos.</li>
+            </ul>
+
+            <h4>Horarios de Atención</h4>
+            <p><strong>Lunes a Viernes:</strong> 8:00 a.m. - 5:00 p.m.</p>
+            <p><strong>Sábados:</strong> 8:00 a.m. - 12:00 m.d.</p>
+
+            <h4>Ubicación en La Libertad</h4>
+            <p><strong>Colón, La Libertad</strong></p>
+            <p><em>Nota:</em> La dirección específica y números de contacto no están disponibles actualmente.</p>
+            <div id="map-nobs-hidrofusion-colon" class="mapa" style="height: 300px; width: 100%; margin-top: 15px;"></div>
+        </div>
+        <!-- Coca-Cola FEMSA - La Libertad -->
+        <div id="coca-cola-la-libertad" class="empresa">
+            <h3>Coca-Cola FEMSA</h3>
+            <img src="img/coca cola.jpg" alt="Coca-Cola FEMSA" class="imagen-empresa">
+            
+            <h4>Sobre Coca-Cola FEMSA</h4>
+            <p>Coca-Cola es una de las empresas de bebidas más grandes del mundo y tiene operaciones en muchos países, incluyendo El Salvador. En La Libertad, Coca-Cola FEMSA es la embotelladora y distribuidora principal de los productos Coca-Cola.</p>
+            
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Producción y Distribución de Bebidas:</strong> Incluye refrescos, jugos, aguas y bebidas energéticas.</li>
+                <li><strong>Atención al Cliente:</strong> Servicios de soporte y atención para consultas y reclamos.</li>
+            </ul>
+
+            <h4>Horarios de Atención</h4>
+            <p><strong>Lunes a Viernes:</strong> 8:00 a.m. - 5:00 p.m.</p>
+            <p><strong>Sábados:</strong> 8:00 a.m. - 12:00 m.d.</p>
+
+            <h4>Ubicación en La Libertad</h4>
+            <p><strong>Santa Tecla</strong></p>
+            <p><em>Nota:</em> La dirección específica y números de contacto no están disponibles actualmente.</p>
+            <div id="map-coca-cola-santa-tecla" class="mapa" style="height: 300px; width: 100%; margin-top: 15px;"></div>
+        </div>
+
+        <!-- Industrias St. Jack’s - La Libertad -->
+        <div id="industrias-st-jacks-la-libertad" class="empresa">
+            <h3>Industrias St. Jack’s, S.A. de C.V.</h3>
+            <img src="img/bb.jpeg" alt="Industrias St. Jack’s" class="imagen-empresa">
+            
+            <h4>Sobre Industrias St. Jack’s</h4>
+            <p>Industrias St. Jack’s es una empresa líder en la fabricación y comercialización de ropa para bebés, niños y adultos en Centroamérica. La empresa se compromete a diseñar, fabricar y distribuir productos de alta calidad que superen las expectativas de sus clientes.</p>
+            
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Fabricación de Ropa:</strong> Incluye camisetas, blusas, conjuntos, pijamas y polos.</li>
+                <li><strong>Comercialización:</strong> Venta de ropa a nivel regional, con un enfoque en la calidad y el diseño innovador.</li>
+                <li><strong>Atención al Cliente:</strong> Servicios de soporte y atención para consultas y pedidos.</li>
+            </ul>
+
+            <h4>Horarios de Atención</h4>
+            <p><strong>Lunes a Viernes:</strong> 8:00 a.m. - 5:00 p.m.</p>
+            <p><strong>Sábados:</strong> 8:00 a.m. - 12:00 m.d.</p>
+
+            <h4>Ubicación en La Libertad</h4>
+            <p><strong>Antiguo Cuscatlán</strong></p>
+            <p><strong>Dirección:</strong> Zona Industrial La Laguna, Antiguo Cuscatlán, La Libertad.</p>
+            <p><strong>Teléfonos:</strong> +503 2248-6015 y +503 2248-6000</p>
+            <div id="map-st-jacks-antiguo-cuscatlan" class="mapa" style="height: 300px; width: 100%; margin-top: 15px;"></div>
+        </div>
+
+        <!-- Ingeniería Asociada, S.A. de C.V. (IASA) - Cuscatlán -->
+        <div id="ingenieria-asociada-cuscatlan" class="empresa">
+            <h3>Ingeniería Asociada, S.A. de C.V. (IASA)</h3>
+            <img src="img/electromecanica.jpeg" alt="Ingeniería Asociada (IASA)" class="imagen-empresa">
+            
+            <h4>Sobre Ingeniería Asociada (IASA)</h4>
+            <p>Ingeniería Asociada, S.A. de C.V. (IASA) es una empresa líder en el sector de la construcción electromecánica, telecomunicaciones y obras civiles. Fundada en 1977, ha desarrollado proyectos en El Salvador, Guatemala, Honduras y Panamá.</p>
+            
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Proyectos Electromecánicos:</strong> Diseño, suministro, montaje y construcción de líneas de transmisión y subestaciones eléctricas.</li>
+                <li><strong>Telecomunicaciones:</strong> Instalación de cables de fibra óptica y sistemas de telecomunicaciones.</li>
+                <li><strong>Obras Civiles:</strong> Construcción de infraestructura, fundaciones, sistemas de tratamiento de aguas y obras de protección.</li>
+                <li><strong>Suministros:</strong> Provisión de equipos y materiales para proyectos de alta tensión y telecomunicaciones.</li>
+            </ul>
+
+            <h4>Horarios de Atención</h4>
+            <p><strong>Lunes a Viernes:</strong> 8:00 a.m. - 5:00 p.m.</p>
+            <p><strong>Sábados:</strong> 8:00 a.m. - 12:00 m.d.</p>
+
+            <h4>Ubicación en La Libertad</h4>
+            <p><strong>Antiguo Cuscatlán</strong></p>
+            <p><strong>Dirección:</strong> Jardines de Guadalupe, Calle Caribe No. 13, Antiguo Cuscatlán, La Libertad.</p>
+            <p><strong>Teléfonos:</strong> +503 2524-0400</p>
+            <div id="map-ingenieria-asociada" class="mapa" style="height: 300px; width: 100%; margin-top: 15px;"></div>
+        </div>
+
+        <!-- Protech El Salvador, S.A. de C.V. - Cuscatlán -->
+        <div id="protech-cuscatlan" class="empresa">
+            <h3>Protech El Salvador, S.A. de C.V.</h3>
+            <img src="img/productos quimicos.jpg" alt="Protech El Salvador" class="imagen-empresa">
+            
+            <h4>Sobre Protech El Salvador</h4>
+            <p>Protech El Salvador, S.A. de C.V. es una empresa dedicada a la fabricación y comercialización de productos químicos y relacionados. Fundada en 2006, se especializa en la distribución de productos químicos para diversas industrias.</p>
+            
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Fabricación de Productos Químicos:</strong> Incluye una amplia gama de productos químicos para diferentes aplicaciones industriales.</li>
+                <li><strong>Comercio al por Mayor:</strong> Distribución de productos químicos a nivel nacional e internacional.</li>
+                <li><strong>Asesoría Técnica:</strong> Servicios de consultoría y asesoría técnica para el uso adecuado de sus productos.</li>
+            </ul>
+
+            <h4>Horarios de Atención</h4>
+            <p><strong>Lunes a Viernes:</strong> 8:00 a.m. - 5:00 p.m.</p>
+            <p><strong>Sábados:</strong> 8:00 a.m. - 12:00 m.d.</p>
+
+            <h4>Ubicación en La Libertad</h4>
+            <p><strong>Merliot, Cuscatlán</strong></p>
+            <p><strong>Dirección:</strong> Jardines de la Sabana, Calle La Sabana, Polígono C-5 #25, Merliot, Cuscatlán.</p>
+            <p><strong>Teléfonos:</strong> Información no disponible.</p>
+            <div id="map-protech" class="mapa" style="height: 300px; width: 100%; margin-top: 15px;"></div>
+        </div>
+
+        <!-- Hencorp Valores S.A. Titularizadora - La Libertad -->
+        <div id="hencorp-titularizadora" class="empresa">
+            <h3>Hencorp Valores S.A. Titularizadora</h3>
+            <img src="img/Hencorp-Valores-El-Salvador.jpg" alt="Hencorp Valores S.A. Titularizadora" class="imagen-empresa">
+            
+            <h4>Sobre Hencorp Valores S.A. Titularizadora</h4>
+            <p>Hencorp Valores S.A. Titularizadora es una empresa especializada en la titularización de activos. Forma parte del Grupo Hencorp y se dedica a estructurar y gestionar proyectos de titularización, ofreciendo soluciones financieras innovadoras y eficientes.</p>
+            
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Estudio de Factibilidad de Proyectos de Titularización:</strong> Evaluación de la viabilidad de proyectos de titularización.</li>
+                <li><strong>Estructuración de Proyectos de Titularización:</strong> Diseño y ejecución de estructuras financieras para la titularización de activos.</li>
+                <li><strong>Gestión de Activos Titularizados:</strong> Administración y monitoreo de los activos titularizados para asegurar su rendimiento.</li>
+            </ul>
+
+            <h4>Horarios de Atención</h4>
+            <p><strong>Lunes a Viernes:</strong> 9:00 a.m. - 6:00 p.m.</p>
+            <p><strong>Sábados:</strong> 9:00 a.m. - 12:00 m.d.</p>
+
+            <h4>Ubicación en La Libertad</h4>
+            <p><strong>Santa Elena, Antiguo Cuscatlán</strong></p>
+            <p><strong>Dirección:</strong> Edificio D’CORA, 2do. piso, Boulevard Orden de Malta y Calle el Boquerón, Urbanización Santa Elena, Antiguo Cuscatlán, La Libertad.</p>
+            <p><strong>Teléfonos:</strong> +503 2212-8700</p>
+            <div id="map-hencorp-titularizadora" class="mapa" style="height: 300px; width: 100%; margin-top: 15px;"></div>
+        </div>
+
+        <!-- Corporación Hotelera Sociedad Anónima de Capital Variable - Cuscatlán -->
+        <div id="Corporacion hotelera" class="empresa">
+            <h3>Corporación Hotelera Sociedad Anónima de Capital Variable</h3>
+            <img src="img/hotelera.jpeg" alt="Corporacion-hotelera" class="imagen-empresa">
+
+            <h4>Sobre la Empresa</h4>
+            <p>Corporación Hotelera Sociedad Anónima de Capital Variable es una empresa dedicada a la industria hotelera en el departamento de Cuscatlán, El Salvador.</p>
+
+            <h4>Dirección Principal</h4>
+            <p><strong>Dirección:</strong> Final Boulevard Los Próceres, 200 metros al oriente de Basílica de Guadalupe, Cuscatlán, Cuscatlán, El Salvador.</p>
+
+            <h4>Horarios de Atención</h4>
+            <p><strong>Lunes a Viernes:</strong> 8:00 a.m. - 6:00 p.m.</p>
+            <p><strong>Sábado:</strong> 9:00 a.m. - 1:00 p.m.</p>
+            <p><strong>Domingo:</strong> Cerrado</p>
+
+            <h4>Servicios</h4>
+            <ul>
+                <li><strong>Alojamiento:</strong> Habitaciones y suites para huéspedes.</li>
+                <li><strong>Restauración:</strong> Restaurantes y cafeterías dentro de las instalaciones.</li>
+                <li><strong>Eventos:</strong> Salones para conferencias, bodas y otros eventos.</li>
+                <li><strong>Recreación:</strong> Piscinas, gimnasios y áreas de esparcimiento.</li>
+            </ul>
+
+            <h4>Ubicaciones de las Sucursales en Cuscatlán</h4>
+            <p><strong>Sucursal Principal:</strong> Final Boulevard Los Próceres, 200 metros al oriente de Basílica de Guadalupe, Cuscatlán.</p>
+            <p><strong>Sucursal Suchitoto:</strong> Calle Principal, Suchitoto, Cuscatlán.</p>
+
+            <div id="map-corporacion-hotelera" class="mapa" style="height: 300px; width: 100%; margin-top: 15px;"></div>
+        </div>
+
+        <!-- Corten, S.A. de C.V. - La Paz -->
+        <div id="Corten, S.A. de C.V." class="empresa">
+            <h3>Corten, S.A. de C.V.</h3>
+            <img src="img/obras.jpeg" alt="Corten, S.A. de C.V." class="imagen-empresa">
+
+            <h4>Información de la Empresa</h4>
+            <p><strong>Dirección Principal:</strong> Km. 28.5 Carretera a Comalapa, Olocuilta, La Paz.</p>
+            <p><strong>Teléfono:</strong> 2349-0400</p>
+
+            <h4>Horarios de Atención</h4>
+            <p><strong>Lunes a Viernes:</strong> 8:00 a.m. - 5:00 p.m.</p>
+            <p><strong>Sábado:</strong> 8:00 a.m. - 12:00 p.m.</p>
+            <p><strong>Domingo:</strong> Cerrado</p>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Terracería:</strong> Movimientos masivos de tierra, diseños de terrazas, cortes y rellenos estructurales.</li>
+                <li><strong>Urbanización:</strong> Diseño y construcción de urbanizaciones en el sector público y privado.</li>
+                <li><strong>Obras de Protección:</strong> Impermeabilización, anclajes, estabilización y mejoramiento de obras.</li>
+                <li><strong>Infraestructura Vial:</strong> Diseño y ejecución de vías pavimentadas y no pavimentadas.</li>
+                <li><strong>Pavimentos y Agregados:</strong> Desarrollo de pavimentos y suministro de agregados.</li>
+                <li><strong>Edificaciones:</strong> Construcción de edificios utilizando las mejores prácticas.</li>
+                <li><strong>Telecomunicaciones:</strong> Proyectos relacionados con infraestructura de telecomunicaciones.</li>
+                <li><strong>Agroindustria:</strong> Proyectos productivos como estanques para acuicultura y riego por goteo.</li>
+            </ul>
+
+            <h4>Ubicaciones de las Sucursales en La Paz</h4>
+            <p><strong>Sucursal Principal:</strong> Km. 28.5 Carretera a Comalapa, Olocuilta, La Paz.</p>
+
+            <div id="map-corten" class="mapa" style="height: 300px; width: 100%; margin-top: 15px;"></div>
+        </div>
+
+             <!-- Aka Hotel & Home Supplies - Cuscatlán -->
+        <div id="aka-hotel-supplies" class="empresa">
+            <h3>Aka Hotel & Home Supplies</h3>
+            <img src="img/hotel.jpg" alt="Aka Hotel & Home Supplies" class="imagen-empresa">
+
+            <h4>Información de la Empresa</h4>
+            <p><strong>Dirección Principal:</strong> Km. 12.5 Carretera a Comalapa, San Marcos, San Salvador.</p>
+
+            <h4>Horarios de Atención</h4>
+            <p><strong>Lunes a Viernes:</strong> 8:00 a.m. - 5:00 p.m.</p>
+            <p><strong>Sábado:</strong> 8:00 a.m. - 1:00 p.m.</p>
+            <p><strong>Domingo:</strong> Cerrado</p>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Distribución de Artículos para Hotelería:</strong> Vajillas, cristalería, cubertería, utensilios de cocina, mobiliario, textiles y más.</li>
+                <li><strong>Suministros para el Hogar:</strong> Electrodomésticos, muebles, artículos de decoración y otros productos para el hogar.</li>
+                <li><strong>Asesoría y Consultoría:</strong> Servicios de asesoría para la selección de productos adecuados para hoteles y hogares.</li>
+            </ul>
+
+            <h4>Ubicaciones de las Sucursales en Cuscatlán</h4>
+            <p><strong>Sucursal Principal:</strong> Km. 12.5 Carretera a Comalapa, San Marcos, San Salvador.</p>
+
+            <div id="map-aka-hotel-supplies" class="mapa" style="height: 300px; width: 100%; margin-top: 15px;"></div>
+        </div>
+
+        <!-- Fun Crafts International - La Paz -->
+        <div id="fun crafts international" class="empresa">
+            <h3>Fun Crafts International, S.A. de C.V.</h3>
+            <img src="img/multiple.jpeg" alt="Fun Crafts International" class="imagen-empresa">
+
+            <h4>Información de la Empresa</h4>
+            <p><strong>Dirección Principal:</strong> Km 28.5 Carretera a Comalapa, Zona Franca Internacional, Bodega 1 y 2, Olocuilta, La Paz.</p>
+            <p><strong>Teléfono:</strong> 2389-8604</p>
+            <p><strong>Sitio Web:</strong> <a href="http://funcrafts4u.com" target="_blank">funcrafts4u.com</a></p>
+
+            <h4>Horarios de Atención</h4>
+            <p><strong>Lunes a Viernes:</strong> 8:00 a.m. - 5:00 p.m.</p>
+            <p><strong>Sábado:</strong> 8:00 a.m. - 12:00 p.m.</p>
+            <p><strong>Domingo:</strong> Cerrado</p>
+
+            <h4>Servicios y Productos</h4>
+            <ul>
+                <li><strong>Categorías de Productos:</strong> Hogar, decoración, juguetes, estaciones y otros productos derivados de la madera.</li>
+                <li><strong>Exportación:</strong> Exportan a Centroamérica y Sudamérica, aprovechando acuerdos de libre comercio.</li>
+                <li><strong>Producción Local:</strong> La producción se realiza 100% en El Salvador, beneficiando a los clientes con una logística más centralizada.</li>
+                <li><strong>Diseños Innovadores:</strong> Productos decorativos de madera con diseños altamente innovadores que superan las expectativas del cliente.</li>
+                <li><strong>Compromiso con la Calidad:</strong> Enfocados en la mejora continua y en entregar productos durables y de alta calidad.</li>
+            </ul>
+
+            <h4>Ubicación de la Sucursal en La Paz</h4>
+            <p><strong>Sucursal Principal:</strong> Km 28.5 Carretera a Comalapa, Zona Franca Internacional, Bodega 1 y 2, Olocuilta, La Paz.</p>
+
+            <div id="map-fun-crafts-international" class="mapa" style="height: 300px; width: 100%; margin-top: 15px;"></div>
+        </div>
+
+        <!-- Caja de Crédito de Zacatecoluca - La Paz -->
+        <div id="caja-credito-zacatecoluca" class="empresa">
+            <h3>Caja de Crédito de Zacatecoluca</h3>
+            <img src="img/zacatecoluca.jpg" alt="Caja de Crédito de Zacatecoluca" class="imagen-empresa">
+
+            <h4>Información de la Empresa</h4>
+            <p><strong>Dirección Principal:</strong> 2a Calle Poniente y 4a Avenida Norte, Zacatecoluca, La Paz.</p>
+            <p><strong>Teléfono:</strong> 2345-6789</p>
+            <p><strong>Sitio Web:</strong> <a href="http://cajazacate.com.sv" target="_blank">cajazacate.com.sv</a></p>
+
+            <h4>Horarios de Atención</h4>
+            <p><strong>Lunes a Viernes:</strong> 8:00 a.m. - 4:00 p.m.</p>
+            <p><strong>Sábado:</strong> 8:00 a.m. - 12:00 p.m.</p>
+            <p><strong>Domingo:</strong> Cerrado</p>
+
+            <h4>Servicios</h4>
+            <ul>
+                <li><strong>Créditos:</strong> Préstamos personales, comerciales y agrícolas.</li>
+                <li><strong>Ahorros:</strong> Cuentas de ahorro y depósitos a plazo.</li>
+                <li><strong>Servicios Financieros:</strong> Transferencias, pagos de servicios, y más.</li>
+            </ul>
+
+            <h4>Historia</h4>
+            <p>La Caja de Crédito de Zacatecoluca fue fundada en 1942 con el objetivo de proporcionar financiamiento a los sectores productivos de Zacatecoluca.</p>
+
+            <h4>Ubicaciones de las Sucursales en La Paz</h4>
+            
+            <h5>Sucursal Principal</h5>
+            <p><strong>Dirección:</strong> 1.ª Avenida Sur, n.° 4, Barrio San José, Zacatecoluca.</p>
+            <div id="map-sucursal-principal" class="mapa" style="height: 300px; width: 100%; margin-top: 15px;"></div>
+
+            <h5>Sucursal Santiago Nonualco</h5>
+            <p><strong>Dirección:</strong> Calle Principal, Santiago Nonualco.</p>
+            <div id="map-sucursal-santiago" class="mapa" style="height: 300px; width: 100%; margin-top: 15px;"></div>
+        </div>
+
+        <!-- Enerland Group El Salvador S.A. de C.V. -->
+        <div id="enerland-group" class="empresa">
+            <h3>Enerland Group El Salvador S.A. de C.V.</h3>
+            <img src="img/energia solar.jpg" alt="Enerland Group El Salvador" class="imagen-empresa">
+
+            <h4>Información de la Empresa</h4>
+            <p><strong>Sector:</strong> Infraestructura y Energía Eléctrica</p>
+            <p><strong>Especialización:</strong> Energía solar fotovoltaica</p>
+            <p><strong>Sitio Web:</strong> <a href="http://enerlandgroup.com" target="_blank">enerlandgroup.com</a></p>
+
+            <h4>Proyectos</h4>
+            <p>Enerland Group ha realizado varios proyectos fotovoltaicos en El Salvador, con una inversión de más de 30 millones de dólares, consolidándose como un referente en la región centroamericana.</p>
+
+            <h4>Servicios</h4>
+            <ul>
+                <li><strong>Ingeniería Fotovoltaica:</strong> Diseño y ejecución de proyectos de energía solar.</li>
+                <li><strong>Consultoría:</strong> Asesoría en proyectos de energía renovable.</li>
+                <li><strong>Mantenimiento:</strong> Servicios de mantenimiento para instalaciones fotovoltaicas.</li>
+            </ul>
+
+            <h4>Ubicación</h4>
+            <p><strong>Dirección Principal:</strong> Calle Bilbilis (Plataforma Logística), 18 - Nav a 4, 50197 Zaragoza, España.</p>
+            <div id="map-enerland" class="mapa" style="height: 300px; width: 100%; margin-top: 15px;"></div>
+        </div>
+
+        <!-- Ingenio La Cabaña -->
+        <div id="ingenio-la-cabana" class="empresa">
+            <h3>Ingenio La Cabaña</h3>
+            <img src="img/azucar.jpeg" alt="Ingenio La Cabaña" class="imagen-empresa">
+
+            <h4>Información de la Empresa</h4>
+            <p><strong>Dirección Principal:</strong> Km 3 vía Guachené, Cauca, Colombia.</p>
+            <p><strong>Teléfono:</strong> 602-3930300</p>
+
+            <h4>Horarios de Atención</h4>
+            <p><strong>Lunes a Viernes:</strong> 8:00 AM - 5:00 PM</p>
+            <p><strong>Sábado:</strong> 8:00 AM - 12:00 PM</p>
+            <p><strong>Domingo:</strong> Cerrado</p>
+
+            <h4>Servicios</h4>
+            <ul>
+                <li><strong>Producción de Azúcar:</strong> Azúcar blanca y cruda (morena) para el mercado nacional e internacional.</li>
+                <li><strong>Cogeneración de Energía:</strong> Producción de energía a partir de biomasa.</li>
+                <li><strong>Sostenibilidad Social y Ambiental:</strong> Proyectos de responsabilidad social y ambiental en la región.</li>
+            </ul>
+
+            <h4>Ubicaciones de las Sucursales</h4>
+            
+            <h5>Planta de Producción</h5>
+            <p><strong>Dirección:</strong> Km 3 vía Guachené, Cauca, Colombia.</p>
+            <div id="map-planta-produccion" class="mapa" style="height: 300px; width: 100%; margin-top: 15px;"></div>
+
+            <h5>Oficina en Cali</h5>
+            <p><strong>Dirección:</strong> Cali, Colombia.</p>
+            <div id="map-oficina-cali" class="mapa" style="height: 300px; width: 100%; margin-top: 15px;"></div>
+        </div>
+
+        <!-- Asociación Salvadoreña de Industriales (ASI) -->
+        <div id="Asociación Salvadoreña de Industriales" class="empresa">
+            <h3>Asociación Salvadoreña de Industriales (ASI)</h3>
+            <img src="img/desarrolo.webp" alt="Asociación Salvadoreña de Industriales (ASI)" class="imagen-empresa">
+
+            <h4>Información de la Empresa</h4>
+            <p><strong>Dirección Principal:</strong> Calle Roma y Liverpool, Colonia Roma, San Salvador, El Salvador.</p>
+            <p><strong>Teléfono:</strong> +503 2267 9200</p>
+            <p><strong>Sitio Web:</strong> <a href="http://industriaelsalvador.com" target="_blank">industriaelsalvador.com</a></p>
+
+            <h4>Horarios de Atención</h4>
+            <p><strong>Lunes a Viernes:</strong> 8:00 AM - 5:00 PM</p>
+
+            <h4>Servicios</h4>
+            <ul>
+                <li><strong>Capacitación:</strong> Programas de formación y actualización para trabajadores de la industria.</li>
+                <li><strong>Estudios e Informes:</strong> Análisis especializados y estudios técnicos sobre el desempeño económico y normativo del país.</li>
+                <li><strong>Eventos:</strong> Organización de eventos y actividades para promover el desarrollo industrial.</li>
+                <li><strong>Apoyo a Empresas:</strong> Asesoría y respaldo a empresas industriales, facilitando su crecimiento y competitividad.</li>
+            </ul>
+
+            <h4>Ubicación de la Sucursal</h4>
+            <h5>Sede Central</h5>
+            <p><strong>Dirección:</strong> Calle Roma y Liverpool, Colonia Roma, San Salvador, El Salvador.</p>
+            <div id="map-asi" class="mapa" style="height: 300px; width: 100%; margin-top: 15px;"></div>
+        </div>
+
+        <!-- Asociación Comité Contra el Sida (CoCoSI) -->
+        <div id=" Asociación Comité Contra el Sida (CoCoSI)" class="empresa">
+            <h3>Asociación Comité Contra el Sida (CoCoSI)</h3>
+            <img src="img/sida.jpg" alt="Asociación Comité Contra el Sida (CoCoSI)" class="imagen-empresa">
+
+            <h4>Información de la Organización</h4>
+            <p><strong>Dirección:</strong> El Zapote, Victoria, Cabañas, 1210, El Salvador.</p>
+
+            <h4>Horarios de Atención</h4>
+            <p><strong>Lunes a Viernes:</strong> 8:00 a.m. - 5:00 p.m.</p>
+            <p><strong>Sábados:</strong> 8:00 a.m. - 12:00 m.d.</p>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Educación y Prevención:</strong> Programas educativos para desmitificar el VIH/SIDA y promover prácticas sexuales seguras.</li>
+                <li><strong>Capacitaciones:</strong> Talleres y capacitaciones sobre salud sexual y reproductiva.</li>
+                <li><strong>Apoyo Psicosocial:</strong> Asistencia y apoyo a personas viviendo con VIH/SIDA.</li>
+                <li><strong>Distribución de Condones:</strong> Campañas de distribución de condones y pruebas de detección del VIH.</li>
+            </ul>
+
+            <h4>Ubicación de la Sucursal</h4>
+            <div id="map-cocosi" class="mapa" style="height: 300px; width: 100%; margin-top: 15px;"></div>
+        </div>
+
+        <!-- Grupo de Servicios Aplicaciones y Desarrollos Tecnológicos S.A. de C.V. (Grupo Saytec) -->
+        <div id="Grupo de Servicios Aplicaciones y Desarrollos Tecnológicos S.A. de C.V. (Grupo Saytec)" class="empresa">
+            <h3>Grupo de Servicios Aplicaciones y Desarrollos Tecnológicos S.A. de C.V. (Grupo Saytec)</h3>
+            <img src="img/tecnologicpo.jpeg" alt="Grupo Saytec" class="imagen-empresa">
+
+            <h4>Información de la Empresa</h4>
+            <p><strong>Dirección:</strong> Avenida Independencia, Colonia Manuel José Arce, San Salvador, El Salvador.</p>
+            <p><strong>Teléfono:</strong> +503 2519 9231</p>
+            <p><strong>Sitio Web:</strong> <a href="http://gruposaytec.com" target="_blank">gruposaytec.com</a></p>
+
+            <h4>Horarios</h4>
+            <p><strong>Lunes a Viernes:</strong> 8:00 AM - 5:00 PM</p>
+            <p><strong>Sábado:</strong> Cerrado</p>
+            <p><strong>Domingo:</strong> Cerrado</p>
+
+            <h4>Servicios</h4>
+            <ul>
+                <li><strong>Desarrollo de Aplicaciones Móviles:</strong> Creación de aplicaciones nativas para Android e iOS.</li>
+                <li><strong>SMS Marketing y Email Marketing:</strong> Envío de campañas de marketing a través de SMS y correo electrónico.</li>
+                <li><strong>Desarrollo de Sitios Web:</strong> Diseño y desarrollo de sitios web responsivos y modernos.</li>
+                <li><strong>Revistas Digitales:</strong> Creación y gestión de publicaciones digitales.</li>
+                <li><strong>Mantenimiento Predictivo:</strong> Servicios especializados para el mantenimiento predictivo de equipos eléctricos.</li>
+                <li><strong>Consultoría Tecnológica:</strong> Asesoría en la implementación y optimización de soluciones tecnológicas.</li>
+            </ul>
+
+            <h4>Ubicación de la Sucursal</h4>
+            <div id="map-saytec" class="mapa" style="height: 300px; width: 100%; margin-top: 15px;"></div>
+        </div>
+        <!-- Óptima Servicios Financieros, S.A. de C.V. -->
+        <div id="Óptima Servicios Financieros, S.A. de C.V." class="empresa">
+            <h3>Óptima Servicios Financieros, S.A. de C.V.</h3>
+            <img src="img/optica.jpeg" alt="Óptima Servicios Financieros" class="imagen-empresa">
+
+            <h4>Información de la Empresa</h4>
+            <p><strong>Sitio Web:</strong> <a href="http://optima.com.sv" target="_blank">optima.com.sv</a></p>
+
+            <h4>Servicios</h4>
+            <ul>
+                <li><strong>Créditos Personales:</strong> Préstamos para necesidades personales.</li>
+                <li><strong>Créditos para Negocios:</strong> Financiamiento para capital de trabajo, adquisición de activos y consolidación de deudas.</li>
+                <li><strong>Créditos para Empresas:</strong> Soluciones financieras para empresas de mayor tamaño.</li>
+                <li><strong>Remesas:</strong> Servicios de recepción y envío de remesas.</li>
+                <li><strong>Pago de Servicios:</strong> Facilidades para el pago de servicios básicos.</li>
+            </ul>
+
+            <h4>Horarios</h4>
+            <p><strong>Lunes a Viernes:</strong> 8:00 AM - 12:30 PM y 1:30 PM - 5:00 PM</p>
+            <p><strong>Sábado:</strong> 8:00 AM - 12:00 PM</p>
+            <p><strong>Domingo:</strong> Cerrado</p>
+
+            <h4>Ubicación de la Sucursal en San Vicente</h4>
+            <p><strong>Dirección:</strong> 3° Calle Poniente N° 7, Boulevard El Centro, contiguo al Ex Cine Jiboa, San Vicente</p>
+            
+            <div id="map-optima" class="mapa" style="height: 300px; width: 100%; margin-top: 15px;"></div>
+        </div>
+
+        <!-- Súper Selectos en San Vicente -->
+        <div id="super-selectos-san-vicente" class="empresa">
+            <h3>Súper Selectos</h3>
+            <img src="img/Super Selectos.jpg" alt="super-selectos-san-vicente" class="imagen-empresa">
+
+            <h4>Información de la Empresa</h4>
+            <p>Súper Selectos es la cadena de supermercados líder en El Salvador, con más de 110 sucursales en todo el país. Fundada en 1950 por Daniel Calleja, la empresa ha crecido significativamente y ahora forma parte del Grupo Calleja.</p>
+
+            <h4>Historia</h4>
+            <ul>
+                <li><strong>1950:</strong> Daniel Calleja abre la primera tienda llamada “Sumesa” en San Salvador.</li>
+                <li><strong>1969:</strong> Se inaugura la primera tienda bajo el nombre “Súper Selectos”.</li>
+                <li><strong>Década de 1990:</strong> Expansión significativa con la adquisición de otras cadenas de supermercados como El Sol, Todo por Menos, Multimart y La Tapachulteca.</li>
+            </ul>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Venta de Productos de Consumo Diario:</strong> Alimentos frescos, bebidas, productos de limpieza, cuidado personal, y más.</li>
+                <li><strong>Tienda en Línea:</strong> Posibilidad de realizar compras a través de su sitio web y recibir los productos a domicilio.</li>
+                <li><strong>App Selectos:</strong> Aplicación móvil para facilitar las compras y acceder a promociones exclusivas.</li>
+            </ul>
+
+            <h4>Horarios de Atención</h4>
+            <p><strong>Lunes a domingo:</strong> 7:00 a.m. - 9:00 p.m.</p>
+
+            <h4>Ubicación en San Vicente</h4>
+            <p><strong>Dirección:</strong> 2a Avenida Sur y 2a Calle Oriente, San Vicente, El Salvador.</p>
+            <p><strong>Teléfonos:</strong> +503 2267-6767</p>
+            
+            <div id="map-super-selectos" class="mapa" style="height: 300px; width: 100%; margin-top: 15px;"></div>
+        </div>
+
+        <!-- Delivery Hero El Salvador (PedidosYa) -->
+        <div id="delivery-hero" class="empresa">
+            <h3>Delivery Hero El Salvador (PedidosYa)</h3>
+            <img src="img/pedidos ya.jpeg" alt="super-selectos-san-vicente" >
+
+            <h4>Información de la Empresa</h4>
+            <p>Delivery Hero El Salvador, S.A. de C.V., opera bajo la marca PedidosYa en El Salvador. Esta empresa se dedica principalmente a la entrega de alimentos y otros productos a domicilio.</p>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Entrega de alimentos:</strong> Colabora con una amplia variedad de restaurantes para ofrecer opciones de comida rápida, gourmet, y más.</li>
+                <li><strong>Supermercado:</strong> Puedes pedir productos de supermercado y recibirlos en tu puerta.</li>
+                <li><strong>Farmacia:</strong> Ofrecen entrega de medicamentos y productos de salud.</li>
+                <li><strong>Otros productos:</strong> También entregan productos electrónicos, artículos de entretenimiento, y más.</li>
+            </ul>
+
+            <h4>Horarios de Atención</h4>
+            <p>Los horarios de servicio pueden variar según la ubicación y el tipo de servicio solicitado. Generalmente, operan desde la mañana hasta la noche, cubriendo las horas pico de comidas y compras.</p>
+
+            <h4>Ubicación</h4>
+            <p><strong>Dirección:</strong> Calle El Mirador Y 87 Av. Norte, Local Sandbox, Edificio World Trade Center, San Salvador, San Vicente, El Salvador.</p>
+
+            <div id="map-delivery-hero" class="mapa" style="height: 300px; width: 100%; margin-top: 15px;"></div>
+        </div>
+
+        <!-- Super Repuestos -->
+        <div id="super-repuestos" class="empresa">
+            <h3>Super Repuestos</h3>
+            <img src="img/super repuesto.jpg" alt="Super Repuestos">
+
+            <h4>Información de la Empresa</h4>
+            <p>Super Repuestos es una empresa líder en El Salvador dedicada a la venta de repuestos y accesorios para vehículos.</p>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Repuestos automotrices:</strong> Ofrecen una amplia variedad de repuestos para diferentes marcas y modelos de vehículos.</li>
+                <li><strong>Lubricantes y químicos:</strong> Disponibles para el mantenimiento y cuidado de tu vehículo.</li>
+                <li><strong>Herramientas y equipos:</strong> Para talleres y uso personal.</li>
+                <li><strong>Servicio a domicilio:</strong> Entrega de repuestos directamente a tu ubicación.</li>
+            </ul>
+
+            <h4>Horarios de Atención</h4>
+            <p>Lunes a viernes: 7:30 am - 5:30 pm<br>
+            Sábados: 7:30 am - 4:00 pm (algunas sucursales cierran a la 1:00 pm)<br>
+            Domingos: Cerrado</p>
+
+            <h4>Ubicación en San Vicente</h4>
+            <p><strong>Dirección:</strong> San Vicente<br>
+            <strong>Teléfono:</strong> 2347 6100<br>
+            <strong>Horario:</strong> Lunes a sábado, 8:00 am - 1:00 pm</p>
+
+            <div id="map-super-repuestos" class="mapa" style="height: 300px; width: 100%; margin-top: 15px;"></div>
+        </div>
+
+        <!-- Claro -->
+        <div id="claro san vicente" class="empresa">
+            <h3>Claro</h3>
+            <img src="img/claro.jpg" alt="Sucursal Claro">
+
+            <h4>Información de la Empresa</h4>
+            <p>Claro es una de las principales empresas de telecomunicaciones en El Salvador, ofreciendo una amplia gama de servicios.</p>
+
+            <h4>Servicios Ofrecidos</h4>
+            <ul>
+                <li><strong>Telefonía móvil:</strong> Planes de voz y datos para diferentes necesidades.</li>
+                <li><strong>Internet:</strong> Servicios de internet residencial y móvil.</li>
+                <li><strong>Televisión:</strong> Planes de televisión digital con una variedad de canales.</li>
+                <li><strong>Telefonía fija:</strong> Servicios de línea fija para hogares y negocios.</li>
+                <li><strong>Servicios empresariales:</strong> Soluciones de telecomunicaciones para empresas.</li>
+            </ul>
+
+            <h4>Horarios de Atención</h4>
+            <p>Lunes a sábado: 9:00 am - 7:00 pm<br>
+            Domingos: 10:00 am - 4:00 pm</p>
+
+            <h4>Ubicación en San Vicente</h4>
+            <p><strong>Dirección:</strong> 2a Avenida Sur y 2a Calle Oriente, San Vicente, El Salvador.<br>
+            <strong>Teléfono:</strong> +503 2267-6767</p>
+
+
+            <div id="map-claro" class="mapa" style="height: 300px; width: 100%; margin-top: 15px;"></div>
+        </div>
+
+    </section>
+    
+    <footer>
+        <p>© 2024 - Página creada por estudiantes de ingeniería en desarrollo de software de ITCA-FEPADE.</p>
+    </footer>
+    
+    <script>
+        const departamentos = [
+            'San Salvador', 'La Libertad', 'Santa Ana', 'San Miguel', 'Usulután',
+            'Chalatenango', 'Cabañas', 'Cuscatlán', 'La Paz', 'San Vicente',
+            'Morazán', 'Ahuachapán', 'Sonsonate', 'La Unión'
+        ];
+    
+        const urlParams = new URLSearchParams(window.location.search);
+        const nombreDepartamento = urlParams.get('nombre') || 'Desconocido';
+        document.getElementById('nombre-departamento').textContent = nombreDepartamento;
+    
+        // Mostrar información específica para cada departamento
+        if (nombreDepartamento === 'San Salvador') {
+            document.getElementById('super-selectos').style.display = 'block';
+            document.getElementById('galvaniza').style.display = 'block';
+            document.getElementById('almacenes-vidri').style.display = 'block';
+            document.getElementById('ferreteria-freund').style.display = 'block'; 
+            document.getElementById('claro').style.display = 'block';
+            document.getElementById('tigo').style.display = 'block';
+            document.getElementById('coscafe').style.display = 'block';
+            document.getElementById('nestle').style.display = 'block';
+            document.getElementById('farmacia san nicolas').style.display = 'block';
+            document.getElementById('agua cristal').style.display = 'block';
+            document.getElementById('coca cola').style.display = 'block';
+            document.getElementById('LCR').style.display = 'block';
+        }
+        if (nombreDepartamento === 'Usulután') {
+            document.getElementById('galvanissa-usulutan').style.display = 'block';
+            document.getElementById('super selectos ').style.display = 'block';
+            document.getElementById('Campos Escobar S.A').style.display = 'block';
+            document.getElementById('ferreteria-san-rafael-usulutan').style.display = 'block';
+            document.getElementById('funeraria-la-resurreccion-usulutan').style.display = 'block';
+        }
+        if (nombreDepartamento === 'Santa Ana') {
+            document.getElementById('walmart').style.display = 'block';
+            document.getElementById('Maxi Despensa').style.display = 'block';
+            document.getElementById('Super Selectos').style.display = 'block';
+            document.getElementById('textiles exportacion').style.display = 'block';
+            document.getElementById('casa del repuesto').style.display = 'block';
+            document.getElementById('Industria de la Confección Americana Salvadoreña S.A. de C.V. INCAS').style.display = 'block';
+            document.getElementById('Claro').style.display = 'block';
+            document.getElementById('Tigo').style.display = 'block';
+        }
+        if (nombreDepartamento === 'Chalatenango') {
+            document.getElementById('tigo Chalatenango').style.display = 'block';
+            document.getElementById('claro Chalatenango').style.display = 'block';
+            document.getElementById('super-selectos-chalatenango').style.display = 'block';
+            document.getElementById('Caess').style.display = 'block';
+            document.getElementById('Electronica-2000').style.display = 'block';
+        }
+        if (nombreDepartamento === 'Ahuachapán') {
+            document.getElementById('SociedadCooperativaDeCafetaleros').style.display = 'block';
+            document.getElementById('Lausanne').style.display = 'block';
+            document.getElementById('hiltex').style.display = 'block';
+            document.getElementById('Astrovision').style.display = 'block';
+            document.getElementById('Claro').style.display = 'block';
+            document.getElementById('Tigo').style.display = 'block';
+         }
+         if (nombreDepartamento === 'Sonsonate') {
+            document.getElementById('Freund').style.display = 'block';
+            document.getElementById('Vidri').style.display = 'block';
+            document.getElementById('Super selectos').style.display = 'block';
+            document.getElementById('corporacion-denisse').style.display = 'block';
+            document.getElementById('autokia').style.display = 'block';
+         }
+         if (nombreDepartamento === 'San Miguel') {
+        document.getElementById('Super SElectos').style.display = 'block';
+        document.getElementById('walmart').style.display = 'block';
+        document.getElementById('Productos Alimenticios Diana S.A. de C.V.').style.display = 'block';
+        document.getElementById('zagrofer').style.display = 'block';
+        document.getElementById('grupo-la-merced').style.display = 'block';
+        document.getElementById('Zamorano Group, S.A. de C.V.').style.display = 'block';
+        document.getElementById('empresa-electrica-oriente').style.display = 'block';
+        }
+        if (nombreDepartamento === 'Morazán'){
+            document.getElementById('cafe-perquin').style.display = 'block';
+            document.getElementById('Cooperativa Caficultores').style.display = 'block';
+            document.getElementById('cooperativa-caficultores').style.display = 'block';
+        }
+        if (nombreDepartamento === 'La Unión') {
+            document.getElementById('fedecaces').style.display = 'block';
+            document.getElementById('puerto-la-union').style.display = 'block';
+            document.getElementById('distribuidora-la-union').style.display = 'block';
+            document.getElementById('ferreteria-la-union').style.display = 'block';
+        }
+        if (nombreDepartamento === 'La Libertad') {
+            document.getElementById ('vidri-la-libertad').style.display = 'block';
+            document.getElementById ('anda-la-libertad').style.display = 'block';
+            document.getElementById ('hencorp-la-libertad').style.display = 'block';
+            document.getElementById ('nobs-hidrofusion-la-libertad').style.display = 'block';
+            document.getElementById('coca-cola-la-libertad').style.display = 'block';
+            document.getElementById('industrias-st-jacks-la-libertad').style.display = 'block';
+        }
+        if (nombreDepartamento === 'Cuscatlán') {
+            document.getElementById('ingenieria-asociada-cuscatlan').style.display = 'block';
+            document.getElementById('protech-cuscatlan').style.display = 'block'
+            document.getElementById('hencorp-titularizadora').style.display = 'block';
+            document.getElementById('Corporacion hotelera').style.display = 'block';
+        }
+        if (nombreDepartamento === 'La Paz'){
+            document.getElementById('Corten, S.A. de C.V.').style.display = 'block';
+            document.getElementById('aka-hotel-supplies').style.display = 'block';
+            document.getElementById('fun crafts international').style.display = 'block';
+            document.getElementById('caja-credito-zacatecoluca').style.display = 'block'; 
+            document.getElementById('enerland-group').style.display = 'block';
+        }
+        if (nombreDepartamento === 'Cabañas'){
+            document.getElementById('ingenio-la-cabana').style.display = 'block';
+            document.getElementById('Asociación Salvadoreña de Industriales').style.display = 'block';
+            document.getElementById(' Asociación Comité Contra el Sida (CoCoSI)').style.display = 'block';
+            document.getElementById('Grupo de Servicios Aplicaciones y Desarrollos Tecnológicos S.A. de C.V. (Grupo Saytec)').style.display = 'block';
+        }
+        if (nombreDepartamento === 'San Vicente'){
+            document.getElementById('Óptima Servicios Financieros, S.A. de C.V.').style.display = 'block';
+            document.getElementById('super-selectos-san-vicente').style.display = 'block';
+            document.getElementById('delivery-hero').style.display = 'block';
+            document.getElementById('super-repuestos').style.display = 'block';
+            document.getElementById('claro san vicente').style.display = 'block'
+        }
+         
+        // Mapa para cada sucursal
+        function initMap() {
+            // Super Selectos Masferrer
+            const mapMasferrer = new google.maps.Map(document.getElementById('map-selectos-masferrer'), {
+                center: { lat: 13.693, lng: -89.239 },
+                zoom: 15,
+            });
+            new google.maps.Marker({ position: { lat: 13.693, lng: -89.239 }, map: mapMasferrer });
+
+            // Super Selectos Multiplaza
+            const mapMultiplaza = new google.maps.Map(document.getElementById('map-selectos-multiplaza'), {
+                center: { lat: 13.682, lng: -89.246 },
+                zoom: 15,
+            });
+            new google.maps.Marker({ position: { lat: 13.682, lng: -89.246 }, map: mapMultiplaza });
+
+            // Super Selectos San Miguelito
+            const mapSanMiguelito = new google.maps.Map(document.getElementById('map-selectos-san-miguelito'), {
+                center: { lat: 13.707, lng: -89.198 },
+                zoom: 15,
+            });
+            new google.maps.Marker({ position: { lat: 13.707, lng: -89.198 }, map: mapSanMiguelito });
+
+            // Super Selectos Escalón
+            const mapEscalon = new google.maps.Map(document.getElementById('map-selectos-escalon'), {
+                center: { lat: 13.684, lng: -89.232 },
+                zoom: 15,
+            });
+            new google.maps.Marker({ position: { lat: 13.684, lng: -89.232 }, map: mapEscalon });
+
+            // Super Selectos Santa Lucía
+            const mapSantaLucia = new google.maps.Map(document.getElementById('map-selectos-santa-lucia'), {
+                center: { lat: 13.687, lng: -89.219 },
+                zoom: 15,
+            });
+            new google.maps.Marker({ position: { lat: 13.687, lng: -89.219 }, map: mapSantaLucia });
+
+            // Galvaniza en San Salvador - Autopista
+            const mapGalvanizaAutopista = new google.maps.Map(document.getElementById('map-galvaniza-autopista'), {
+                center: { lat: 13.678, lng: -89.236 },
+                zoom: 15,
+            });
+            new google.maps.Marker({ position: { lat: 13.678, lng: -89.236 }, map: mapGalvanizaAutopista });
+
+            // Galvaniza en San Salvador - San Miguelito
+            const mapGalvanizaSanMiguelito = new google.maps.Map(document.getElementById('map-galvaniza-san-miguelito'), {
+                center: { lat: 13.706, lng: -89.190 },
+                zoom: 15,
+            });
+            new google.maps.Marker({ position: { lat: 13.706, lng: -89.190 }, map: mapGalvanizaSanMiguelito });
+
+            // Galvaniza en San Salvador - Venezuela
+            const mapGalvanizaVenezuela = new google.maps.Map(document.getElementById('map-galvaniza-venezuela'), {
+                center: { lat: 13.675, lng: -89.231 },
+                zoom: 15,
+            });
+            new google.maps.Marker({ position: { lat: 13.675, lng: -89.231 }, map: mapGalvanizaVenezuela });
+
+            
+        }
+
+        // Llamada a la API de Google Maps
+        function loadScript(url) {
+            var script = document.createElement("script");
+            script.type = "text/javascript";
+            script.src = url;
+            document.body.appendChild(script);
+        }
+
+        loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyCm3uTnJ36PpwKmSxcWE6sDOUBh07F_990&callback=initMap");
+
+        document.getElementById('cerrar-sesion').onclick = function() {
+            // Aquí debes agregar la lógica para cerrar sesión en el servidor
+            // Por ejemplo: realizar una petición para cerrar sesión
+            window.location.href = 'index.html'; // Redirigir a la página de inicio
+        };
+        // Funcionalidad de búsqueda
+        const campoBusqueda = document.getElementById('campo-busqueda');
+        const resultadosBusqueda = document.getElementById('resultados-busqueda');
+
+        campoBusqueda.addEventListener('input', function () {
+            const valorBusqueda = campoBusqueda.value.toLowerCase();
+            resultadosBusqueda.innerHTML = '';
+            resultadosBusqueda.style.display = 'none';
+
+            if (valorBusqueda) {
+                const resultados = departamentos.filter(departamento => departamento.toLowerCase().includes(valorBusqueda));
+                resultados.forEach(departamento => {
+                    const div = document.createElement('div');
+                    div.className = 'departamento';
+                    div.textContent = departamento;
+                    div.onclick = function () {
+                        window.location.href = `departamento.html?nombre=${departamento}`;
+                    };
+                    resultadosBusqueda.appendChild(div);
+                });
+                if (resultados.length > 0) {
+                    resultadosBusqueda.style.display = 'block';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+        
